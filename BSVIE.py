@@ -1,3 +1,4 @@
+import setuptools
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -8,9 +9,8 @@ import os
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 
-
 class volterra_fbsde():
-    def __init__(self, x_0, mu, sig, lam, lam0, T, dim_x, dim_y, dim_d):
+    def __init__(self, x_0, mu, sig, lam, lam0,K, T, dim_x, dim_y, dim_d):
         self.x_0 = x_0
         self.T = T
         self.dim_x = dim_x
@@ -20,6 +20,7 @@ class volterra_fbsde():
         self.sig= sig
         self.lam = lam
         self.lam0 = lam0
+        self.K = K
 
     def b(self, t, x):
         #return mu * torch.ones_like(x) # ABM
@@ -27,7 +28,7 @@ class volterra_fbsde():
         #return torch.zeros_like(x)  # Simple Brownian Motion
 
     def sigma(self, t, x):
-        #return sig * torch.ones_like(x).unsqueeze(-1) # ABM
+        #return sig * torch.ones_like(x).unsqueeze(-1) #ABM
         return self.sig * x.view(-1, 1, 1)  # GBM
         #return torch.ones_like(x).unsqueeze(-1)  # brownian motion
 
@@ -38,12 +39,25 @@ class volterra_fbsde():
         ##return torch.exp(-(s - t)) * indicator * y + z.squeeze(-1) #LINEAR EXAMPLE 1
         #return torch.exp(-(s - t)) * indicator * y + z.squeeze(-1)*torch.exp(s) #LINEAR EXAMPLE 1.1
 
-        return 0.5*x #linear example 2
+        #return 0.5*x #linear example 2
+
+        #EXAMPLE WITH BARRIERS
+        return torch.zeros_like(x)
 
 
     def g(self, t, x):
+        #return x*np.sin(np.pi * t) #LINEAR EXAMPLE 1
+        #return np.exp(-self.lam* t) * x #LINEAR EXAMPLE 2
 
-        return np.exp(-self.lam* t) * x #LINEAR EXAMPLE 2
+        #EXAMPLE WITH BARRIERS
+        discount = 1/(1+(self.T-t))
+        return discount*torch.relu(x-self.K)
+
+
+    def barrier(self, t, x):
+        #discount = 1 / (1 + (self.T - t))
+        #return torch.relu(x-self.K)
+        return 0.1*torch.ones_like(x) #to be fixed for multi dimension
 
 
 class NN_Y(nn.Module):
@@ -52,6 +66,7 @@ class NN_Y(nn.Module):
         self.linear1 = nn.Linear(equation.dim_x + 1, dim_h)
         self.linear2 = nn.Linear(dim_h, dim_h)
         self.linear3 = nn.Linear(dim_h, dim_h)
+        #self.linear4 = nn.Linear(dim_h, dim_h)
         self.linear4 = nn.Linear(dim_h, equation.dim_y)
         self.bn1 = nn.BatchNorm1d(dim_h)
         self.bn2 = nn.BatchNorm1d(dim_h)
@@ -132,7 +147,9 @@ class BSDEsolver():
 
         # Terminal condition: g(t_n, X_T)
         x_T = x_path[N]  # X(T)
-        terminal_val = self.equation.g(t_n, x_T) # g(t, X_T)
+        #terminal_val = torch.max(self.equation.g(t_n, x_T), self.equation.barrier(t_n,x_T)) # g(t, X_T)
+        terminal_val = torch.max(self.equation.g(t_n, x_T), self.equation.barrier(t_n,x_T)) # g(t, X_T)
+
 
         integral_f = torch.zeros_like(y)
         integral_z = torch.zeros_like(y)
@@ -141,12 +158,16 @@ class BSDEsolver():
             s= delta_t*m
             x_s = x_path[m]
 
+            # Get y(s) for all s >= t_n
             if m == n:
+                # At current time step, use the predicted y
                 y_s = y
             else:
+                # For future time steps use trained models
                 if m in future_models_Y:
-                    y_s = future_models_Y[m](N, m, x_s)
+                    y_s = torch.max(future_models_Y[m](N, m, x_s), self.equation.barrier(s,x_s))
 
+            # Z(t, s)
             z_ts = z_dict[m]
             f_val = self.equation.f(t_n, s, x_s, y_s, z_ts)
             integral_f += f_val * delta_t
@@ -320,7 +341,7 @@ class Result():
             self.modelY.load_state_dict(torch.load(os.path.join(path, f"Y_state_dict_{n}"),  map_location=torch.device('cpu')), strict=False)
             self.modelZ.load_state_dict(torch.load(os.path.join(path, f"Z_state_dict_{n}" ),  map_location=torch.device('cpu')), strict=False)
 
-            y = self.modelY(N, n, x[:, :, n])  # [bs, dy]
+            y = torch.max(self.modelY(N, n, x[:, :, n]) , self.equation.barrier(delta_t*n, x[:, :, n] )) # [bs, dy]
             ys[:, :, n] = y
 
             for s_idx in range(n, N-1):
@@ -328,7 +349,7 @@ class Result():
                 zs[:, :, :, n, s_idx] = z
 
         # Terminal condition for Y
-        ys[:, :, N] = self.equation.g(delta_t * N, x[:, :, N])
+        ys[:, :, N] = torch.max(self.equation.g(delta_t * N, x[:, :, N]), self.equation.barrier(delta_t*N, x[:, :, N] )) # [
         return ys, zs
 
 
