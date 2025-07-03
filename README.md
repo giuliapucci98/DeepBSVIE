@@ -1,24 +1,30 @@
 # DeepBSVIE
 
-This repository implements a **discrete-time learning scheme** for solving **Backward Stochastic Volterra Integral Equations (BSVIEs)** based on a recursive backward representation introduced in: [Deep BSVIEs Parametrization and Learning-Based Applications](http://arxiv.org/abs/2507.01948). The repository is organized into two branches to handle standard and reflected BSVIEs, respectively.
+This repository contains a deep learning framework for solving Backward Stochastic Volterra Integral Equations (BSVIEs). The implementation is based on a recursive backward representation introduced in the paper:  
+Deep BSVIEs Parametrization and Learning-Based Applications  
+http://arxiv.org/abs/2507.01948
 
+The repository is structured to handle both standard and reflected BSVIEs through separate branches.
 
-## 🔍 Overview
+## Overview
 
-The code provides a deep learning-based approach to approximate solutions of BSVIEs. It uses feedforward neural networks trained in discrete time to learn the solution of these path-dependent integral equations, with the option to handle reflected versions of BSVIEs.
+We implement a discrete-time neural scheme to approximate the solution of BSVIEs. The method leverages feedforward neural networks, trained recursively on a two-time grid, to learn the solution fields (Y(t), Z(t,s)). The solver accommodates both classical and reflected BSVIEs, making it suitable for applications in time-inconsistent stochastic control and recursive utilities.
 
-## 📂 Repository Structure
+## Repository Structure
 
-- `train.py`  
-  Trains the neural networks and saves the model parameters.
+- `train.py` – Training script for the neural solver; saves learned network parameters.  
+- `test.py` – Evaluation script to test the performance of the trained networks.  
+- `BSVIE.py` – Defines the BSVIE model, discretization scheme, and neural network architecture.
 
-- `test.py`  
-  Loads the trained parameters and evaluates the network performance.
+## Branches
 
-- `BSVIE.py`  
-  Contains the mathematical model specification, neural network architecture, and the solver for the BSVIE.
+- `main` – Standard BSVIE solver  
+- `reflected` – Extension to reflected BSVIEs with obstacle constraints
 
-## 🌿 Branches
+## Reference
 
-- **`main`** – Implements the scheme for standard BSVIEs.
-- **`reflected`** – Includes the extension to **reflected BSVIEs**.
+If you find this code useful, please consider citing:
+
+Agram, N. and Pucci, G. (2025). Deep BSVIEs Parametrization and Learning-Based Applications.  
+arXiv:2507.01948  
+http://arxiv.org/abs/2507.01948
