@@ -1,0 +1,17 @@
+{
+  "dim_x": 2,
+  "dim_y": 1,
+  "dim_d": 2,
+  "dim_h_Y": 11,
+  "dim_h_Z": 11,
+  "N": 50,
+  "itr": 2,
+  "batch_size": 8192,
+  "multiplier": 1,
+  "T": 1.0,
+  "x0_value": 1.0,
+  "mu": 0.1,
+  "sig": 0.2,
+  "lam": 0.05,
+  "lam0": 0.5
+}
