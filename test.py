@@ -12,6 +12,7 @@ from plot_generator import PlotGenerator
 
 # =============== SELECT THESE BEFORE STARTING ===========
 run_name = "linear1_2025-11-15_16-53-07"
+run_name = "reflected_2025-11-15_17-41-09"
 
 # =============== PATHS ===========
 print("Working directory:", os.getcwd())
