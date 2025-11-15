@@ -213,17 +213,7 @@ def validate_against_analytical(equation, example_type, future_models_Y, future_
     if Y_analytical_torch.ndim == 2:
         Y_analytical_torch = Y_analytical_torch.unsqueeze(1)  # [batch_size, 1, N+1]
 
-    # Predict using trained models
-    # x is [batch_size, dim_x, N+1], need to transpose to [batch_size, N+1, dim_x]
-    x_transposed = x.transpose(1, 2)
-    Y_predicted = torch.zeros((batch_size, 1, N + 1), device=device)
-
-    with torch.no_grad():
-        for n in range(N + 1):
-            if n in future_models_Y:
-                x_n = x_transposed[:, n, :]
-                Y_predicted[:, :, n] = future_models_Y[n](N, n, x_n)
-
+    Y_predicted = result.predict_Y(x, N, future_models_Y)  # [batch_size, 1, N+1]
     # Compute Y errors
     mse_per_timestep = ((Y_predicted - Y_analytical_torch) ** 2).mean(dim=0).squeeze().cpu().numpy()
     total_mse_y = mse_per_timestep.mean()
@@ -231,23 +221,7 @@ def validate_against_analytical(equation, example_type, future_models_Y, future_
     # ========== Z VALIDATION ==========
     print(f"\nComputing Z predictions and analytical values...")
 
-    # Initialize Z arrays: [batch_size, dim_y, dim_d, N, N]
-    # We'll simplify to first component: [batch_size, dim_d, N, N]
-    Z_predicted = torch.zeros((batch_size, equation.dim_d, N, N), device=device)
-
-    with torch.no_grad():
-        for n in range(N):
-            if n in future_models_Z:
-                x_n = x_transposed[:, n, :]
-                m_indices = torch.arange(n, N, device=device)
-                x_future = x_transposed[:, n:N, :]  # [batch_size, N-n, dim_x]
-
-                # z_batch shape: [batch_size, N-n, dim_y, dim_d]
-                z_batch = future_models_Z[n](N, n, x_n, m_indices, x_future)
-
-                # Store in Z_predicted: take first dim_y component
-                for idx, m in enumerate(range(n, N)):
-                    Z_predicted[:, :, n, m] = z_batch[:, idx, 0, :]  # [batch_size, dim_d]
+    Z_predicted = result.predict_Z(x, N, future_models_Z)  # [batch_size, dim_x, N, N]
 
     # Compute analytical Z
     # Need to create a temporary z array for analytical_Z method
