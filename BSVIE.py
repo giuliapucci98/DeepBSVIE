@@ -376,7 +376,7 @@ class Solver:
         if use_scheduler:
             scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
                 # self.optimizer, mode='min', factor=0.5, patience=30, threshold=1e-4, min_lr=1e-6
-                self.optimizer, mode='min', factor=factor, patience=patience, min_lr=1e-6
+                self.optimizer, mode='min', factor=factor, patience=patience, threshold = 1e-4,  min_lr=1e-6
             )
 
         history = {
