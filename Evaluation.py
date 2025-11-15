@@ -5,6 +5,8 @@ import os
 import wandb
 import json
 
+from BSVIE import Solver
+
 if torch.cuda.is_available() and torch.version.hip is not None:
     device = torch.device("cuda")
 else:
@@ -14,9 +16,7 @@ print(device)
 
 class Result():
 
-    def __init__(self, modelY, modelZ, equation, example_type):
-        self.modelY = modelY
-        self.modelZ = modelZ
+    def __init__(self,  equation, example_type):
         self.equation = equation
         self.example_type = example_type
 
@@ -192,10 +192,9 @@ def validate_against_analytical(equation, example_type, future_models_Y, future_
     print(f"{'=' * 70}")
 
     batch_size = 1000
-    delta_t = equation.T / N
 
     # Create Result object (use any model, just need for path generation)
-    result = Result(None, None, equation, example_type)
+    result = Result( equation, example_type)
 
     # Generate test paths using Result's method
     W = result.gen_b_motion(batch_size, N)

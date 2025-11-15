@@ -33,7 +33,7 @@ print("State dicts will be saved in:", path)
 
 import wandb
 
-from BSVIE import volterra_fbsde, ImprovedBSDESolver, full_backward_training
+from BSVIE import volterra_fbsde, Solver, full_backward_training
 from Evaluation import validate_against_analytical
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -69,11 +69,15 @@ config = {
     'multiplier': 3,
     'lr': 1e-2,
     'lr_decay': 0.995,
+    'factor_lr_decay': 0.5,
+    'patience_lr_decay': 70,
     'weight_decay': 1e-5,
     'use_scheduler': True,
     'early_stop_threshold': 1e-5,
     'seed': 42,
-    'example_type': example_type
+    'example_type': example_type,
+    'grad_clip': True,
+    'max_grad_norm': 1.0,
 }
 
 config_path = os.path.join(project_dir, new_folder, "config.json")
@@ -128,7 +132,7 @@ wandb.log({"training/total_time_minutes": elapsed_time})
 future_models_Y = {}
 future_models_Z = {}
 for n in sorted(all_results.keys()):
-    solver = ImprovedBSDESolver(
+    solver = Solver(
         equation,
         config['dim_h_Y'],
         config['dim_h_Z'],

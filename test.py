@@ -5,7 +5,7 @@ import json
 import matplotlib.pyplot as plt
 from numpy.ma.core import ones_like
 
-from BSVIE import volterra_fbsde, ImprovedBSDESolver
+from BSVIE import volterra_fbsde, Solver
 from Evaluation import Result
 from plot_generator import PlotGenerator
 
@@ -13,7 +13,7 @@ from plot_generator import PlotGenerator
 # =============== SELECT THESE BEFORE STARTING ===========
 example_type = "nonlinear"  # select example. Options: "linear1", "linear2", "example1a"
 
-run_name = "nonlinear_2025-11-15_10-54-08"
+run_name = "nonlinear_2025-11-15_13-21-08"
 
 # =============== PATHS ===========
 print("Working directory:", os.getcwd())
@@ -67,7 +67,7 @@ equation = volterra_fbsde(
 future_models_Y = {}
 future_models_Z = {}
 for n in range(N + 1):
-    solver = ImprovedBSDESolver(
+    solver = Solver(
         equation,
         config['dim_h_Y'],
         config['dim_h_Z'],
@@ -87,7 +87,7 @@ if example_type != "reflected":
 # =============== GENERATE TEST PATHS ===========
     batch_size = 1000
     delta_t = equation.T / N
-    result = Result(None, None, equation, example_type)
+    result = Result(equation, example_type)
     W = result.gen_b_motion(batch_size, N)
     x = result.gen_x(batch_size, N, W)  # Shape: [batch_size, dim_x, N+1]
 
@@ -185,7 +185,6 @@ if example_type != "reflected":
         example_type="linear1"
     )
     plotter.plot_y_absolute_err(times, err_Y, err_Y.mean(), filename= "Y_absolute_error")
-    #plotter.plot_y_errors(times,err_Y, rel_Y, err_Y.mean(), filename="Y_errors")
     plotter.plot_y_trajectories(times, Y_analytical, Y_predicted, 10, "Y_samples")
     plotter.plot_z_surfaces(Z_analytical, Z_predicted,  T, 0, "Z_surfaces")
     plotter.plot_z_error_heatmap( err_Z,  T, "Z_heatmap")
@@ -203,7 +202,7 @@ else:
 
     batch_size = 1000
     delta_t = equation.T / N
-    result = Result(None, None, equation, example_type)
+    result = Result(equation, example_type)
     W = result.gen_b_motion(batch_size, N)
     x = result.gen_x(batch_size, N, W)  # Shape: [batch_size, dim_x, N+1]
 

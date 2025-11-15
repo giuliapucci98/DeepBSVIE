@@ -194,7 +194,6 @@ class NN_Z(nn.Module):
         return z
 
 
-# check if we want to stop earlier:
 class EarlyStoppingChecker:
     def __init__(self, patience, min_iterations, rel_tolerance, window_size,
                  low_loss_threshold=0.001, low_loss_patience=30):
@@ -244,8 +243,7 @@ class EarlyStoppingChecker:
 
         return False
 
-
-class ImprovedBSDESolver:
+class Solver:
 
     def __init__(self, equation, dim_h_Y, dim_h_Z, lr, weight_decay=1e-5):
         self.equation = equation
@@ -363,8 +361,8 @@ class ImprovedBSDESolver:
             'y_std': y.std().item()
         }
 
-    def train_step(self, batch_size, N, n, itr, multiplier, future_models_Y, reflected, use_scheduler=True,
-                   early_stop_threshold=1e-4, verbose=True):
+    def train_step(self, batch_size, N, n, itr, multiplier, future_models_Y, reflected, use_scheduler,
+                   early_stop_threshold, factor, patience, grad_clip, max_grad_norm, verbose=True):
 
         '''early_stopper = EarlyStoppingChecker(
             patience=100,
@@ -378,7 +376,7 @@ class ImprovedBSDESolver:
         if use_scheduler:
             scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
                 # self.optimizer, mode='min', factor=0.5, patience=30, threshold=1e-4, min_lr=1e-6
-                self.optimizer, mode='min', factor=0.5, patience=70, min_lr=1e-6
+                self.optimizer, mode='min', factor=factor, patience=patience, min_lr=1e-6
             )
 
         history = {
@@ -424,10 +422,11 @@ class ImprovedBSDESolver:
                               for p in self.modelZ.parameters() if p.grad is not None)
             grad_norm = total_norm ** 0.5
 
-            torch.nn.utils.clip_grad_norm_(
-                list(self.modelY.parameters()) + list(self.modelZ.parameters()),
-                max_norm=1.0
-            )
+            if grad_clip:
+                torch.nn.utils.clip_grad_norm_(
+                    list(self.modelY.parameters()) + list(self.modelZ.parameters()),
+                    max_norm=max_grad_norm
+                )
 
             self.optimizer.step()
 
@@ -511,7 +510,7 @@ def full_backward_training(example_type, config, equation, save_dir, reflected):
         if n < N:
             lr = lr * config.get('lr_decay', 0.8) ** (N - n)
 
-        solver = ImprovedBSDESolver(
+        solver = Solver(
             equation,
             dim_h_Y=config.get('dim_h_Y', 64),
             dim_h_Z=config.get('dim_h_Z', 80),
@@ -537,6 +536,10 @@ def full_backward_training(example_type, config, equation, save_dir, reflected):
             future_models_Y=future_models_Y, reflected=reflected,
             use_scheduler=config.get('use_scheduler', True),
             early_stop_threshold=config.get('early_stop_threshold', 1e-4),
+            factor = config.get('factor', 0.5),
+            patience = config.get('patience', 50),
+            grad_clip=config.get('grad_clip', True),
+            max_grad_norm=config.get('max_grad_norm', 1.0),
             verbose=True
         )
 
