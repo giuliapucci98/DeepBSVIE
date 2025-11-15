@@ -116,7 +116,7 @@ class Result():
             times_np = np.array(times)[None, :]
             exp_term = np.exp(-self.equation.lam * times_np) * np.exp(mu_vec * (self.equation.T - times_np))
             integral_term = self.equation.lam0 * (np.exp(mu_vec * (self.equation.T - times_np)) - 1) / mu_vec
-            return np.mean(x * (exp_term + integral_term)[None, :, :], axis=1)
+            return np.mean(x * (exp_term + integral_term)[None, :, :], axis=1)[:, None,:]
 
         elif self.example_type in ["example1a", "nonlinear"]:
             sum_x = np.sum(x, axis=1, keepdims=True)

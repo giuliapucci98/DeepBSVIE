@@ -11,13 +11,10 @@ from plot_generator import PlotGenerator
 
 
 # =============== SELECT THESE BEFORE STARTING ===========
-example_type = "nonlinear"  # select example. Options: "linear1", "linear2", "example1a"
-
-run_name = "nonlinear_2025-11-15_13-21-08"
+run_name = "linear1_2025-11-15_16-53-07"
 
 # =============== PATHS ===========
 print("Working directory:", os.getcwd())
-#new_folder = os.path.join(example_type, run_name)
 new_folder= os.path.join(run_name)
 
 project_dir = "/cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE"
@@ -52,6 +49,7 @@ dim_d = dim_x
 N = config.get('N')
 T = config.get('T')
 x_0 = torch.ones(dim_x).to(device) * config.get('x0_scale')
+example_type = config.get('example_type')
 
 equation = volterra_fbsde(
     x_0=x_0,
@@ -107,8 +105,6 @@ if example_type != "reflected":
     rel_err_per_timestep = (((Y_predicted - Y_analytical_torch) ** 2).mean(dim=0) /
                             (Y_analytical_torch ** 2).mean(dim=0).clamp(min=1e-8)).squeeze().cpu().numpy()
     total_mse_y = mse_per_timestep.mean()
-    total_rel_err_y = rel_err_per_timestep.mean()
-    max_err_y = (Y_predicted - Y_analytical_torch).abs().max().item()
 
 
 # ========== Z VALIDATION ==========
@@ -130,8 +126,6 @@ if example_type != "reflected":
     absolute_err_Z = Z_diff_masked.mean().item()
     total_mse_z = Z_diff_masked.mean().item()
     Z_analytical_sq = (Z_analytical_torch ** 2)[:, :, valid_mask]
-    total_rel_err_z = (Z_diff_masked.mean() / Z_analytical_sq.mean().clamp(min=1e-8)).item()
-    max_err_z = (Z_predicted - Z_analytical_torch).abs().max().item()
 
 
     # =============== PRINT METRICS ===========
@@ -139,10 +133,8 @@ if example_type != "reflected":
     print(f"VALIDATION METRICS")
     print(f"{'=' * 70}")
     print(f"Y - Overall MSE:         {total_mse_y:.6e}")
-    print(f"Y - Overall Rel Error:   {total_rel_err_y:.6f}")
     print(f"{'-' * 70}")
     print(f"Z - Overall MSE:         {total_mse_z:.6e}")
-    print(f"Z - Overall Rel Error:   {total_rel_err_z:.6f}")
     print(f"{'=' * 70}\n")
 
     # =============== SUMMARIZE ===========
@@ -182,7 +174,7 @@ if example_type != "reflected":
     plotter = PlotGenerator(
         figures_path,
         path,
-        example_type="linear1"
+        example_type
     )
     plotter.plot_y_absolute_err(times, err_Y, err_Y.mean(), filename= "Y_absolute_error")
     plotter.plot_y_trajectories(times, Y_analytical, Y_predicted, 10, "Y_samples")

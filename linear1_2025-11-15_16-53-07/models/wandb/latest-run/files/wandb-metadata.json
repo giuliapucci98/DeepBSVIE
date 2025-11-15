@@ -1,0 +1,66 @@
+{
+  "os": "Linux-5.14.21-150500.55.65_13.0.73-cray_shasta_c-x86_64-with-glibc2.35",
+  "python": "CPython 3.10.13",
+  "startedAt": "2025-11-15T15:53:26.851013Z",
+  "program": "/cfs/klemming/home/p/pucci/PycharmProjects/DeepBSVIE/main.py",
+  "codePath": "main.py",
+  "codePathLocal": "main.py",
+  "git": {
+    "remote": "https://github.com/giuliapucci98/DeepBSVIE.git",
+    "commit": "0cf5a0a14956e44463c8a9daf8069fe759603791"
+  },
+  "email": "pucci@kth.se",
+  "root": "/cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/linear1_2025-11-15_16-53-07/models",
+  "host": "nid002793",
+  "executable": "/opt/conda/envs/py_3.10/bin/python3",
+  "cpu_count": 64,
+  "cpu_count_logical": 128,
+  "disk": {
+    "/": {
+      "total": "67108864",
+      "used": "12288"
+    }
+  },
+  "memory": {
+    "total": "539711541248"
+  },
+  "slurm": {
+    "cluster_name": "dardel",
+    "conf": "/var/spool/slurm/slurmd/conf-cache/slurm.conf",
+    "cpus_on_node": "128",
+    "gpus": "1",
+    "gpus_on_node": "8",
+    "gtids": "0",
+    "job_account": "naiss2024-22-1707-gpu",
+    "job_cpus_per_node": "128",
+    "job_end_time": "1763222806",
+    "job_gid": "3224560",
+    "job_gpus": "0,1,2,3,4,5,6,7",
+    "job_id": "14090198",
+    "job_name": "myjob",
+    "job_nodelist": "nid002793",
+    "job_num_nodes": "1",
+    "job_partition": "gpu",
+    "job_qos": "normal",
+    "job_start_time": "1763221906",
+    "job_uid": "3224560",
+    "job_user": "pucci",
+    "jobid": "14090198",
+    "localid": "0",
+    "mpi_type": "cray_shasta",
+    "nnodes": "1",
+    "nodeid": "0",
+    "nodelist": "nid002793",
+    "oom_kill_step": "0",
+    "prio_process": "19",
+    "procid": "0",
+    "script_context": "prolog_task",
+    "submit_dir": "/cfs/klemming/home/p/pucci/PycharmProjects/DeepBSVIE",
+    "submit_host": "login1",
+    "task_pid": "958780",
+    "tasks_per_node": "128",
+    "topology_addr": "nid002793",
+    "topology_addr_pattern": "node"
+  },
+  "writerId": "kdvd1jbuuii2q2fd30bu9p3imsztieof"
+}
