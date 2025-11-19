@@ -16,7 +16,7 @@ We implement a discrete-time neural scheme to approximate the solution of BSVIEs
 - `test.py` – Performs a thorough post-training validation of the learned models, including error evaluation and saving diagnostic plots. 
 - `BSVIE.py` – Implements the full neural BSVIE solver, including the stochastic model, discretization scheme, and network architectures for Y and Z.
 - `Evaluation.py` - Analytical and numerical validation utilities.
-
+- `plot_generator.py`- Used in test.py to generate and save plots.
 
 ## Reference
 

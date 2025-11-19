@@ -65,7 +65,7 @@ config = {
     'dim_h_Y': 40,
     'dim_h_Z': 80,
     'batch_size': 2**12,
-    'itr': 500,
+    'itr': 1,
     'multiplier': 3,
     'lr': 1e-2,
     'lr_decay': 0.995,
@@ -128,29 +128,29 @@ elapsed_time = (end_time - start_time) / 60  # convert seconds to minutes
 print(f"Elapsed time: {elapsed_time:.4f} minutes")
 
 wandb.log({"training/total_time_minutes": elapsed_time})
+if not reflected:
+    future_models_Y = {}
+    future_models_Z = {}
+    for n in sorted(all_results.keys()):
+        solver = Solver(
+            equation,
+            config['dim_h_Y'],
+            config['dim_h_Z'],
+            config['lr'],
+            config['multiplier']
+        )
+        model_y_path = os.path.join(path, f"{example_type}_Y_{n}.pt")
+        model_z_path = os.path.join(path, f"{example_type}_Z_{n}.pt")
+        solver.modelY.load_state_dict(torch.load(model_y_path))
+        solver.modelZ.load_state_dict(torch.load(model_z_path))
+        solver.modelY.eval()
+        solver.modelZ.eval()
+        future_models_Y[n] = solver.modelY
+        future_models_Z[n] = solver.modelZ
 
-future_models_Y = {}
-future_models_Z = {}
-for n in sorted(all_results.keys()):
-    solver = Solver(
-        equation,
-        config['dim_h_Y'],
-        config['dim_h_Z'],
-        config['lr'],
-        config['multiplier']
+    validation_metrics = validate_against_analytical(
+        equation, example_type,
+        future_models_Y, future_models_Z, config['N'], path
     )
-    model_y_path = os.path.join(path, f"{example_type}_Y_{n}.pt")
-    model_z_path = os.path.join(path, f"{example_type}_Z_{n}.pt")
-    solver.modelY.load_state_dict(torch.load(model_y_path))
-    solver.modelZ.load_state_dict(torch.load(model_z_path))
-    solver.modelY.eval()
-    solver.modelZ.eval()
-    future_models_Y[n] = solver.modelY
-    future_models_Z[n] = solver.modelZ
-
-validation_metrics = validate_against_analytical(
-    equation, example_type,
-    future_models_Y, future_models_Z, config['N'], path
-)
 
 wandb.finish()

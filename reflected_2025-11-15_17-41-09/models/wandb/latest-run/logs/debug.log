@@ -1,0 +1,23 @@
+2025-11-15 17:41:21,646 INFO    MainThread:3222961 [wandb_setup.py:_flush():81] Current SDK version is 0.22.2
+2025-11-15 17:41:21,647 INFO    MainThread:3222961 [wandb_setup.py:_flush():81] Configure stats pid to 3222961
+2025-11-15 17:41:21,647 INFO    MainThread:3222961 [wandb_setup.py:_flush():81] Loading settings from /cfs/klemming/home/p/pucci/.config/wandb/settings
+2025-11-15 17:41:21,647 INFO    MainThread:3222961 [wandb_setup.py:_flush():81] Loading settings from /cfs/klemming/home/p/pucci/PycharmProjects/DeepBSVIE/wandb/settings
+2025-11-15 17:41:21,647 INFO    MainThread:3222961 [wandb_setup.py:_flush():81] Loading settings from environment variables
+2025-11-15 17:41:21,647 INFO    MainThread:3222961 [wandb_init.py:setup_run_log_directory():705] Logging user logs to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/reflected_2025-11-15_17-41-09/models/wandb/run-20251115_174121-phs3d0d7/logs/debug.log
+2025-11-15 17:41:21,647 INFO    MainThread:3222961 [wandb_init.py:setup_run_log_directory():706] Logging internal logs to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/reflected_2025-11-15_17-41-09/models/wandb/run-20251115_174121-phs3d0d7/logs/debug-internal.log
+2025-11-15 17:41:21,647 INFO    MainThread:3222961 [wandb_init.py:init():832] calling init triggers
+2025-11-15 17:41:21,648 INFO    MainThread:3222961 [wandb_init.py:init():837] wandb.init called with sweep_config: {}
+config: {'dim_x': 5, 'N': 50, 'T': 1.0, 'mu_base': 0.1, 'sig_base': 0.2, 'x0_scale': 1.0, 'dim_h_Y': 40, 'dim_h_Z': 80, 'batch_size': 4096, 'itr': 500, 'multiplier': 3, 'lr': 0.01, 'lr_decay': 0.995, 'factor_lr_decay': 0.5, 'patience_lr_decay': 50, 'weight_decay': 1e-05, 'use_scheduler': True, 'early_stop_threshold': 1e-05, 'seed': 42, 'example_type': 'reflected', 'grad_clip': False, 'max_grad_norm': 1.0, '_wandb': {}}
+2025-11-15 17:41:21,648 INFO    MainThread:3222961 [wandb_init.py:init():880] starting backend
+2025-11-15 17:41:21,862 INFO    MainThread:3222961 [wandb_init.py:init():883] sending inform_init request
+2025-11-15 17:41:24,788 INFO    MainThread:3222961 [wandb_init.py:init():891] backend started and connected
+2025-11-15 17:41:24,789 INFO    MainThread:3222961 [wandb_init.py:init():961] updated telemetry
+2025-11-15 17:41:24,809 INFO    MainThread:3222961 [wandb_init.py:init():985] communicating run to backend with 90.0 second timeout
+2025-11-15 17:41:27,102 INFO    MainThread:3222961 [wandb_init.py:init():1036] starting run threads in backend
+2025-11-15 17:41:32,826 INFO    MainThread:3222961 [wandb_run.py:_console_start():2509] atexit reg
+2025-11-15 17:41:32,826 INFO    MainThread:3222961 [wandb_run.py:_redirect():2357] redirect: wrap_raw
+2025-11-15 17:41:32,826 INFO    MainThread:3222961 [wandb_run.py:_redirect():2426] Wrapping output streams.
+2025-11-15 17:41:32,826 INFO    MainThread:3222961 [wandb_run.py:_redirect():2449] Redirects installed.
+2025-11-15 17:41:32,831 INFO    MainThread:3222961 [wandb_init.py:init():1076] run started, returning control to user process
+2025-11-15 17:50:37,521 INFO    wandb-AsyncioManager-main:3222961 [service_client.py:_forward_responses():80] Reached EOF.
+2025-11-15 17:50:37,521 INFO    wandb-AsyncioManager-main:3222961 [mailbox.py:close():137] Closing mailbox, abandoning 1 handles.

@@ -1,0 +1,1413 @@
+
+
+######################################################################
+# STARTING FULL TRAINING FOR nonlinear
+# RUN NAME: nonlinear_2025-11-15_14-11-20
+######################################################################
+
+######################################################################
+# FULL BACKWARD TRAINING: nonlinear
+######################################################################
+
+
+======================================================================
+TRAINING TIMESTEP n=50/50 (t=1.000)
+======================================================================
+
+============================================================
+Training timestep n=50 (TERMINAL STEP)
+Time: t=1.000, Future models: 0
+============================================================
+Iter    0: loss=5.372012e-01 | grad=1.6205e+00 | lr=1.00e-02
+Iter    1: loss=6.654739e-01 | grad=3.6957e+00 | lr=1.00e-02
+Iter    2: loss=4.987465e-01 | grad=3.1332e+00 | lr=1.00e-02
+Iter    3: loss=4.046327e-01 | grad=5.3062e-01 | lr=1.00e-02
+Iter    4: loss=4.406552e-01 | grad=1.0103e+00 | lr=1.00e-02
+Iter    5: loss=3.887168e-01 | grad=6.3116e-01 | lr=1.00e-02
+Iter    6: loss=3.717326e-01 | grad=3.1515e-01 | lr=1.00e-02
+Iter    7: loss=3.815526e-01 | grad=1.1482e+00 | lr=1.00e-02
+Iter    8: loss=3.585785e-01 | grad=6.5417e-01 | lr=1.00e-02
+Iter    9: loss=3.345525e-01 | grad=3.4602e-01 | lr=1.00e-02
+Iter  100: loss=4.009321e-02 | grad=1.8952e+00 | lr=1.00e-02
+Iter  200: loss=6.124125e-02 | grad=3.0977e+00 | lr=5.00e-03
+Iter  300: loss=3.270158e-02 | grad=1.5895e+00 | lr=5.00e-03
+Iter  400: loss=4.116764e-02 | grad=3.8248e+00 | lr=2.50e-03
+Iter  500: loss=2.635279e-02 | grad=1.5365e+00 | lr=1.25e-03
+Iter  600: loss=2.041593e-02 | grad=3.1365e-01 | lr=1.25e-03
+Iter  700: loss=2.103976e-02 | grad=3.0926e+00 | lr=1.25e-03
+Iter  800: loss=1.723338e-02 | grad=3.2411e+00 | lr=6.25e-04
+Iter  900: loss=1.345686e-02 | grad=1.7210e+00 | lr=3.13e-04
+Iter 1000: loss=1.166556e-02 | grad=1.7517e+00 | lr=3.13e-04
+Iter 1100: loss=1.014681e-02 | grad=5.3687e-02 | lr=1.56e-04
+Iter 1200: loss=1.075133e-02 | grad=4.5387e-01 | lr=7.81e-05
+Iter 1300: loss=9.727746e-03 | grad=1.5790e-01 | lr=3.91e-05
+Iter 1400: loss=1.034605e-02 | grad=1.3294e-01 | lr=1.95e-05
+✓ Saved loss history for timestep 50 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_50.json
+
+ Final loss: 9.258945e-03
+Iterations used: 1500
+
+======================================================================
+TRAINING TIMESTEP n=49/50 (t=0.980)
+======================================================================
+
+============================================================
+Training timestep n=49 (BACKWARD STEP)
+Time: t=0.980, Future models: 1
+============================================================
+Iter    0: loss=8.436953e-02 | grad=9.5320e-01 | lr=9.95e-03
+Iter    1: loss=5.496773e-01 | grad=2.2652e+00 | lr=9.95e-03
+Iter    2: loss=4.702721e-01 | grad=1.5954e+00 | lr=9.95e-03
+Iter    3: loss=3.117683e-01 | grad=1.4998e+00 | lr=9.95e-03
+Iter    4: loss=1.992064e-01 | grad=1.4621e+00 | lr=9.95e-03
+Iter    5: loss=2.849704e-01 | grad=4.7869e+00 | lr=9.95e-03
+Iter    6: loss=2.921625e-01 | grad=4.0045e+00 | lr=9.95e-03
+Iter    7: loss=2.604228e-01 | grad=2.0153e+00 | lr=9.95e-03
+Iter    8: loss=2.469816e-01 | grad=3.4361e+00 | lr=9.95e-03
+Iter    9: loss=1.760378e-01 | grad=2.0550e+00 | lr=9.95e-03
+Iter  100: loss=7.132630e-02 | grad=2.4994e+00 | lr=9.95e-03
+Iter  200: loss=4.832107e-02 | grad=3.7506e+00 | lr=9.95e-03
+Iter  300: loss=3.220083e-02 | grad=3.5300e+00 | lr=9.95e-03
+Iter  400: loss=2.320296e-02 | grad=3.2475e+00 | lr=4.98e-03
+✓ Saved loss history for timestep 49 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_49.json
+
+ Final loss: 1.504338e-02
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=48/50 (t=0.960)
+======================================================================
+
+============================================================
+Training timestep n=48 (BACKWARD STEP)
+Time: t=0.960, Future models: 2
+============================================================
+Iter    0: loss=3.921987e-02 | grad=2.5617e+00 | lr=9.90e-03
+Iter    1: loss=4.500640e-01 | grad=2.0414e+00 | lr=9.90e-03
+Iter    2: loss=4.122857e-01 | grad=1.5827e+00 | lr=9.90e-03
+Iter    3: loss=2.800699e-01 | grad=1.5928e+00 | lr=9.90e-03
+Iter    4: loss=1.901909e-01 | grad=1.6990e+00 | lr=9.90e-03
+Iter    5: loss=1.866068e-01 | grad=2.9287e+00 | lr=9.90e-03
+Iter    6: loss=1.439990e-01 | grad=3.1863e+00 | lr=9.90e-03
+Iter    7: loss=1.764705e-01 | grad=4.5879e+00 | lr=9.90e-03
+Iter    8: loss=2.041783e-01 | grad=4.2918e+00 | lr=9.90e-03
+Iter    9: loss=1.827083e-01 | grad=1.9309e+00 | lr=9.90e-03
+Iter  100: loss=7.656191e-02 | grad=3.6782e+00 | lr=4.95e-03
+Iter  200: loss=2.247351e-02 | grad=3.8012e-01 | lr=2.48e-03
+Iter  300: loss=1.522848e-02 | grad=2.5719e+00 | lr=2.48e-03
+Iter  400: loss=1.445042e-02 | grad=2.8371e+00 | lr=2.48e-03
+✓ Saved loss history for timestep 48 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_48.json
+
+ Final loss: 1.080235e-02
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=47/50 (t=0.940)
+======================================================================
+
+============================================================
+Training timestep n=47 (BACKWARD STEP)
+Time: t=0.940, Future models: 3
+============================================================
+Iter    0: loss=2.857487e-02 | grad=2.8284e+00 | lr=9.85e-03
+Iter    1: loss=4.592919e-01 | grad=1.7625e+00 | lr=9.85e-03
+Iter    2: loss=3.905091e-01 | grad=1.5806e+00 | lr=9.85e-03
+Iter    3: loss=3.284323e-01 | grad=1.6294e+00 | lr=9.85e-03
+Iter    4: loss=1.931257e-01 | grad=1.7481e+00 | lr=9.85e-03
+Iter    5: loss=1.577105e-01 | grad=2.7133e+00 | lr=9.85e-03
+Iter    6: loss=1.591314e-01 | grad=1.8975e+00 | lr=9.85e-03
+Iter    7: loss=1.508505e-01 | grad=3.3842e+00 | lr=9.85e-03
+Iter    8: loss=1.635341e-01 | grad=2.0755e+00 | lr=9.85e-03
+Iter    9: loss=1.617005e-01 | grad=2.3970e+00 | lr=9.85e-03
+Iter  100: loss=2.926321e-02 | grad=6.4911e-01 | lr=4.93e-03
+Iter  200: loss=2.037934e-02 | grad=2.1664e+00 | lr=2.46e-03
+Iter  300: loss=2.006568e-02 | grad=2.7786e+00 | lr=2.46e-03
+Iter  400: loss=1.611994e-02 | grad=2.8052e+00 | lr=1.23e-03
+✓ Saved loss history for timestep 47 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_47.json
+
+ Final loss: 1.231248e-02
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=46/50 (t=0.920)
+======================================================================
+
+============================================================
+Training timestep n=46 (BACKWARD STEP)
+Time: t=0.920, Future models: 4
+============================================================
+Iter    0: loss=3.429947e-02 | grad=2.8178e+00 | lr=9.80e-03
+Iter    1: loss=5.118979e-01 | grad=1.7908e+00 | lr=9.80e-03
+Iter    2: loss=4.242122e-01 | grad=1.6761e+00 | lr=9.80e-03
+Iter    3: loss=3.385053e-01 | grad=1.6607e+00 | lr=9.80e-03
+Iter    4: loss=2.259007e-01 | grad=1.5993e+00 | lr=9.80e-03
+Iter    5: loss=1.581972e-01 | grad=2.4228e+00 | lr=9.80e-03
+Iter    6: loss=1.794923e-01 | grad=1.8860e+00 | lr=9.80e-03
+Iter    7: loss=1.380566e-01 | grad=1.6624e+00 | lr=9.80e-03
+Iter    8: loss=1.459121e-01 | grad=8.7837e-01 | lr=9.80e-03
+Iter    9: loss=1.326728e-01 | grad=7.7149e-01 | lr=9.80e-03
+Iter  100: loss=3.332293e-02 | grad=2.1701e+00 | lr=4.90e-03
+Iter  200: loss=2.452000e-02 | grad=2.9534e+00 | lr=4.90e-03
+Iter  300: loss=1.610490e-02 | grad=2.3922e+00 | lr=2.45e-03
+Iter  400: loss=1.128627e-02 | grad=4.0790e-01 | lr=1.23e-03
+✓ Saved loss history for timestep 46 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_46.json
+
+ Final loss: 1.192588e-02
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=45/50 (t=0.900)
+======================================================================
+
+============================================================
+Training timestep n=45 (BACKWARD STEP)
+Time: t=0.900, Future models: 5
+============================================================
+Iter    0: loss=3.124062e-02 | grad=2.6040e+00 | lr=9.75e-03
+Iter    1: loss=4.476631e-01 | grad=1.7160e+00 | lr=9.75e-03
+Iter    2: loss=3.718634e-01 | grad=1.5634e+00 | lr=9.75e-03
+Iter    3: loss=2.909458e-01 | grad=1.5119e+00 | lr=9.75e-03
+Iter    4: loss=1.869898e-01 | grad=1.5425e+00 | lr=9.75e-03
+Iter    5: loss=1.329493e-01 | grad=2.8299e+00 | lr=9.75e-03
+Iter    6: loss=1.201952e-01 | grad=1.3047e+00 | lr=9.75e-03
+Iter    7: loss=2.160137e-01 | grad=4.5394e+00 | lr=9.75e-03
+Iter    8: loss=2.115344e-01 | grad=3.4398e+00 | lr=9.75e-03
+Iter    9: loss=1.753933e-01 | grad=2.3487e+00 | lr=9.75e-03
+Iter  100: loss=3.051380e-02 | grad=1.3914e+00 | lr=4.88e-03
+Iter  200: loss=3.174432e-02 | grad=2.3601e+00 | lr=2.44e-03
+Iter  300: loss=2.376261e-02 | grad=2.3097e+00 | lr=2.44e-03
+Iter  400: loss=2.601195e-02 | grad=2.8761e+00 | lr=2.44e-03
+✓ Saved loss history for timestep 45 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_45.json
+
+ Final loss: 1.594114e-02
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=44/50 (t=0.880)
+======================================================================
+
+============================================================
+Training timestep n=44 (BACKWARD STEP)
+Time: t=0.880, Future models: 6
+============================================================
+Iter    0: loss=3.968596e-02 | grad=2.5962e+00 | lr=9.70e-03
+Iter    1: loss=4.154422e-01 | grad=1.7114e+00 | lr=9.70e-03
+Iter    2: loss=3.965950e-01 | grad=1.4976e+00 | lr=9.70e-03
+Iter    3: loss=2.833202e-01 | grad=1.5686e+00 | lr=9.70e-03
+Iter    4: loss=2.042118e-01 | grad=1.4992e+00 | lr=9.70e-03
+Iter    5: loss=1.224222e-01 | grad=1.6344e+00 | lr=9.70e-03
+Iter    6: loss=1.195163e-01 | grad=1.6965e+00 | lr=9.70e-03
+Iter    7: loss=2.187892e-01 | grad=3.5113e+00 | lr=9.70e-03
+Iter    8: loss=2.331071e-01 | grad=2.5768e+00 | lr=9.70e-03
+Iter    9: loss=2.093954e-01 | grad=2.0068e+00 | lr=9.70e-03
+Iter  100: loss=3.131307e-02 | grad=1.7448e+00 | lr=4.85e-03
+Iter  200: loss=2.252537e-02 | grad=1.2549e+00 | lr=2.43e-03
+Iter  300: loss=1.748819e-02 | grad=1.9804e+00 | lr=2.43e-03
+Iter  400: loss=1.711902e-02 | grad=2.0809e+00 | lr=2.43e-03
+✓ Saved loss history for timestep 44 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_44.json
+
+ Final loss: 1.161256e-02
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=43/50 (t=0.860)
+======================================================================
+
+============================================================
+Training timestep n=43 (BACKWARD STEP)
+Time: t=0.860, Future models: 7
+============================================================
+Iter    0: loss=3.014492e-02 | grad=2.3636e+00 | lr=9.66e-03
+Iter    1: loss=4.811344e-01 | grad=1.6544e+00 | lr=9.66e-03
+Iter    2: loss=3.607023e-01 | grad=1.3118e+00 | lr=9.66e-03
+Iter    3: loss=2.838518e-01 | grad=1.5802e+00 | lr=9.66e-03
+Iter    4: loss=1.989009e-01 | grad=1.6967e+00 | lr=9.66e-03
+Iter    5: loss=1.515635e-01 | grad=2.4855e+00 | lr=9.66e-03
+Iter    6: loss=1.156618e-01 | grad=1.9020e+00 | lr=9.66e-03
+Iter    7: loss=1.655949e-01 | grad=3.7481e+00 | lr=9.66e-03
+Iter    8: loss=1.964763e-01 | grad=2.2215e+00 | lr=9.66e-03
+Iter    9: loss=1.425242e-01 | grad=1.1683e+00 | lr=9.66e-03
+Iter  100: loss=2.936729e-02 | grad=2.0995e+00 | lr=4.83e-03
+Iter  200: loss=3.121918e-02 | grad=2.6480e+00 | lr=2.41e-03
+Iter  300: loss=1.442477e-02 | grad=7.1248e-01 | lr=1.21e-03
+Iter  400: loss=1.290309e-02 | grad=3.1900e-01 | lr=1.21e-03
+✓ Saved loss history for timestep 43 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_43.json
+
+ Final loss: 1.171860e-02
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=42/50 (t=0.840)
+======================================================================
+
+============================================================
+Training timestep n=42 (BACKWARD STEP)
+Time: t=0.840, Future models: 8
+============================================================
+Iter    0: loss=3.013631e-02 | grad=2.2086e+00 | lr=9.61e-03
+Iter    1: loss=5.895561e-01 | grad=2.0813e+00 | lr=9.61e-03
+Iter    2: loss=4.017480e-01 | grad=1.3873e+00 | lr=9.61e-03
+Iter    3: loss=3.496505e-01 | grad=1.4040e+00 | lr=9.61e-03
+Iter    4: loss=2.357372e-01 | grad=1.6351e+00 | lr=9.61e-03
+Iter    5: loss=1.868969e-01 | grad=1.3784e+00 | lr=9.61e-03
+Iter    6: loss=1.186680e-01 | grad=9.4077e-01 | lr=9.61e-03
+Iter    7: loss=1.515252e-01 | grad=1.7795e+00 | lr=9.61e-03
+Iter    8: loss=1.627907e-01 | grad=1.6902e+00 | lr=9.61e-03
+Iter    9: loss=1.548555e-01 | grad=1.0284e+00 | lr=9.61e-03
+Iter  100: loss=2.522820e-02 | grad=5.3255e-01 | lr=4.80e-03
+Iter  200: loss=2.050637e-02 | grad=1.4366e+00 | lr=2.40e-03
+Iter  300: loss=1.820143e-02 | grad=1.4541e+00 | lr=1.20e-03
+Iter  400: loss=1.503278e-02 | grad=4.7033e-01 | lr=6.00e-04
+✓ Saved loss history for timestep 42 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_42.json
+
+ Final loss: 1.500437e-02
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=41/50 (t=0.820)
+======================================================================
+
+============================================================
+Training timestep n=41 (BACKWARD STEP)
+Time: t=0.820, Future models: 9
+============================================================
+Iter    0: loss=3.001724e-02 | grad=2.1582e+00 | lr=9.56e-03
+Iter    1: loss=5.037768e-01 | grad=1.9076e+00 | lr=9.56e-03
+Iter    2: loss=3.795849e-01 | grad=1.2645e+00 | lr=9.56e-03
+Iter    3: loss=3.339910e-01 | grad=1.4081e+00 | lr=9.56e-03
+Iter    4: loss=2.486942e-01 | grad=1.3616e+00 | lr=9.56e-03
+Iter    5: loss=1.389754e-01 | grad=1.4990e+00 | lr=9.56e-03
+Iter    6: loss=1.118763e-01 | grad=1.9417e+00 | lr=9.56e-03
+Iter    7: loss=1.232265e-01 | grad=1.3794e+00 | lr=9.56e-03
+Iter    8: loss=1.868269e-01 | grad=1.6111e+00 | lr=9.56e-03
+Iter    9: loss=1.924828e-01 | grad=3.6470e+00 | lr=9.56e-03
+Iter  100: loss=3.676994e-02 | grad=2.5935e+00 | lr=4.78e-03
+Iter  200: loss=2.498831e-02 | grad=2.1010e+00 | lr=4.78e-03
+Iter  300: loss=2.747527e-02 | grad=2.7735e+00 | lr=2.39e-03
+Iter  400: loss=1.399462e-02 | grad=4.9978e-01 | lr=1.19e-03
+✓ Saved loss history for timestep 41 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_41.json
+
+ Final loss: 1.291850e-02
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=40/50 (t=0.800)
+======================================================================
+
+============================================================
+Training timestep n=40 (BACKWARD STEP)
+Time: t=0.800, Future models: 10
+============================================================
+Iter    0: loss=2.756056e-02 | grad=1.9325e+00 | lr=9.51e-03
+Iter    1: loss=4.522899e-01 | grad=2.1271e+00 | lr=9.51e-03
+Iter    2: loss=3.471586e-01 | grad=1.3118e+00 | lr=9.51e-03
+Iter    3: loss=2.767725e-01 | grad=1.4244e+00 | lr=9.51e-03
+Iter    4: loss=2.355223e-01 | grad=1.4591e+00 | lr=9.51e-03
+Iter    5: loss=2.425230e-01 | grad=2.4097e+00 | lr=9.51e-03
+Iter    6: loss=1.849969e-01 | grad=2.3174e+00 | lr=9.51e-03
+Iter    7: loss=1.390494e-01 | grad=2.2832e+00 | lr=9.51e-03
+Iter    8: loss=1.253209e-01 | grad=2.3447e+00 | lr=9.51e-03
+Iter    9: loss=1.467462e-01 | grad=2.2735e+00 | lr=9.51e-03
+Iter  100: loss=4.742460e-02 | grad=2.8466e+00 | lr=4.76e-03
+Iter  200: loss=2.226735e-02 | grad=2.0829e+00 | lr=4.76e-03
+Iter  300: loss=1.381194e-02 | grad=6.1009e-01 | lr=2.38e-03
+Iter  400: loss=1.267510e-02 | grad=4.9554e-01 | lr=1.19e-03
+✓ Saved loss history for timestep 40 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_40.json
+
+ Final loss: 1.283401e-02
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=39/50 (t=0.780)
+======================================================================
+
+============================================================
+Training timestep n=39 (BACKWARD STEP)
+Time: t=0.780, Future models: 11
+============================================================
+Iter    0: loss=2.649313e-02 | grad=1.7806e+00 | lr=9.46e-03
+Iter    1: loss=3.786647e-01 | grad=1.7724e+00 | lr=9.46e-03
+Iter    2: loss=3.148845e-01 | grad=1.2475e+00 | lr=9.46e-03
+Iter    3: loss=2.462581e-01 | grad=1.2544e+00 | lr=9.46e-03
+Iter    4: loss=1.945252e-01 | grad=1.3769e+00 | lr=9.46e-03
+Iter    5: loss=1.928371e-01 | grad=2.5631e+00 | lr=9.46e-03
+Iter    6: loss=1.815704e-01 | grad=2.3943e+00 | lr=9.46e-03
+Iter    7: loss=1.116617e-01 | grad=1.7299e+00 | lr=9.46e-03
+Iter    8: loss=1.089015e-01 | grad=1.8827e+00 | lr=9.46e-03
+Iter    9: loss=1.486725e-01 | grad=2.1724e+00 | lr=9.46e-03
+Iter  100: loss=8.181846e-02 | grad=3.1353e+00 | lr=4.73e-03
+Iter  200: loss=2.838974e-02 | grad=2.2891e+00 | lr=4.73e-03
+Iter  300: loss=1.394427e-02 | grad=7.7484e-01 | lr=2.37e-03
+Iter  400: loss=1.297495e-02 | grad=2.4051e-01 | lr=1.18e-03
+✓ Saved loss history for timestep 39 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_39.json
+
+ Final loss: 1.226289e-02
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=38/50 (t=0.760)
+======================================================================
+
+============================================================
+Training timestep n=38 (BACKWARD STEP)
+Time: t=0.760, Future models: 12
+============================================================
+Iter    0: loss=2.478700e-02 | grad=1.5632e+00 | lr=9.42e-03
+Iter    1: loss=4.011255e-01 | grad=1.9884e+00 | lr=9.42e-03
+Iter    2: loss=3.116058e-01 | grad=1.2473e+00 | lr=9.42e-03
+Iter    3: loss=2.633844e-01 | grad=1.3045e+00 | lr=9.42e-03
+Iter    4: loss=1.967730e-01 | grad=1.1922e+00 | lr=9.42e-03
+Iter    5: loss=1.817043e-01 | grad=1.7026e+00 | lr=9.42e-03
+Iter    6: loss=1.001348e-01 | grad=1.1615e+00 | lr=9.42e-03
+Iter    7: loss=1.041817e-01 | grad=2.0219e+00 | lr=9.42e-03
+Iter    8: loss=1.266419e-01 | grad=1.7605e+00 | lr=9.42e-03
+Iter    9: loss=1.177477e-01 | grad=1.1316e+00 | lr=9.42e-03
+Iter  100: loss=2.271555e-02 | grad=1.2546e+00 | lr=4.71e-03
+Iter  200: loss=2.139455e-02 | grad=2.0326e+00 | lr=4.71e-03
+Iter  300: loss=1.336630e-02 | grad=4.8380e-01 | lr=2.35e-03
+Iter  400: loss=1.281539e-02 | grad=2.7407e-01 | lr=1.18e-03
+✓ Saved loss history for timestep 38 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_38.json
+
+ Final loss: 1.226025e-02
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=37/50 (t=0.740)
+======================================================================
+
+============================================================
+Training timestep n=37 (BACKWARD STEP)
+Time: t=0.740, Future models: 13
+============================================================
+Iter    0: loss=2.531735e-02 | grad=1.6279e+00 | lr=9.37e-03
+Iter    1: loss=3.779739e-01 | grad=1.8817e+00 | lr=9.37e-03
+Iter    2: loss=3.217046e-01 | grad=1.3179e+00 | lr=9.37e-03
+Iter    3: loss=2.550039e-01 | grad=1.3403e+00 | lr=9.37e-03
+Iter    4: loss=2.165904e-01 | grad=1.3676e+00 | lr=9.37e-03
+Iter    5: loss=1.458353e-01 | grad=1.5110e+00 | lr=9.37e-03
+Iter    6: loss=9.727719e-02 | grad=1.4731e+00 | lr=9.37e-03
+Iter    7: loss=1.573477e-01 | grad=2.3931e+00 | lr=9.37e-03
+Iter    8: loss=1.460138e-01 | grad=1.6206e+00 | lr=9.37e-03
+Iter    9: loss=1.695496e-01 | grad=2.5556e+00 | lr=9.37e-03
+Iter  100: loss=1.670034e-02 | grad=8.2986e-01 | lr=4.68e-03
+Iter  200: loss=2.397540e-02 | grad=2.0379e+00 | lr=2.34e-03
+Iter  300: loss=1.305973e-02 | grad=1.3052e-01 | lr=1.17e-03
+Iter  400: loss=1.343210e-02 | grad=2.9850e-01 | lr=1.17e-03
+✓ Saved loss history for timestep 37 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_37.json
+
+ Final loss: 1.281590e-02
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=36/50 (t=0.720)
+======================================================================
+
+============================================================
+Training timestep n=36 (BACKWARD STEP)
+Time: t=0.720, Future models: 14
+============================================================
+Iter    0: loss=2.521280e-02 | grad=1.5124e+00 | lr=9.32e-03
+Iter    1: loss=3.910493e-01 | grad=1.9761e+00 | lr=9.32e-03
+Iter    2: loss=3.101150e-01 | grad=1.4244e+00 | lr=9.32e-03
+Iter    3: loss=2.454734e-01 | grad=1.2737e+00 | lr=9.32e-03
+Iter    4: loss=2.159678e-01 | grad=1.3790e+00 | lr=9.32e-03
+Iter    5: loss=2.173201e-01 | grad=1.7556e+00 | lr=9.32e-03
+Iter    6: loss=1.419146e-01 | grad=1.5726e+00 | lr=9.32e-03
+Iter    7: loss=1.636753e-01 | grad=2.0280e+00 | lr=9.32e-03
+Iter    8: loss=1.505991e-01 | grad=1.3452e+00 | lr=9.32e-03
+Iter    9: loss=1.793370e-01 | grad=2.7522e+00 | lr=9.32e-03
+Iter  100: loss=2.639681e-02 | grad=1.9337e+00 | lr=4.66e-03
+Iter  200: loss=1.451284e-02 | grad=7.8206e-01 | lr=2.33e-03
+Iter  300: loss=1.315176e-02 | grad=1.9891e-01 | lr=1.17e-03
+Iter  400: loss=1.277067e-02 | grad=1.6753e-01 | lr=5.83e-04
+✓ Saved loss history for timestep 36 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_36.json
+
+ Final loss: 1.265881e-02
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=35/50 (t=0.700)
+======================================================================
+
+============================================================
+Training timestep n=35 (BACKWARD STEP)
+Time: t=0.700, Future models: 15
+============================================================
+Iter    0: loss=2.493954e-02 | grad=1.4435e+00 | lr=9.28e-03
+Iter    1: loss=3.594288e-01 | grad=1.7647e+00 | lr=9.28e-03
+Iter    2: loss=3.120615e-01 | grad=1.6565e+00 | lr=9.28e-03
+Iter    3: loss=2.454080e-01 | grad=1.4719e+00 | lr=9.28e-03
+Iter    4: loss=2.634461e-01 | grad=1.7186e+00 | lr=9.28e-03
+Iter    5: loss=1.254181e-01 | grad=1.3923e+00 | lr=9.28e-03
+Iter    6: loss=1.112800e-01 | grad=1.7624e+00 | lr=9.28e-03
+Iter    7: loss=1.372774e-01 | grad=2.0284e+00 | lr=9.28e-03
+Iter    8: loss=1.098864e-01 | grad=1.5091e+00 | lr=9.28e-03
+Iter    9: loss=1.688561e-01 | grad=2.5126e+00 | lr=9.28e-03
+Iter  100: loss=2.316234e-02 | grad=1.5908e+00 | lr=4.64e-03
+Iter  200: loss=2.463860e-02 | grad=2.0158e+00 | lr=4.64e-03
+Iter  300: loss=1.709332e-02 | grad=1.4710e+00 | lr=1.16e-03
+Iter  400: loss=1.353950e-02 | grad=1.1916e-01 | lr=5.80e-04
+✓ Saved loss history for timestep 35 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_35.json
+
+ Final loss: 1.237231e-02
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=34/50 (t=0.680)
+======================================================================
+
+============================================================
+Training timestep n=34 (BACKWARD STEP)
+Time: t=0.680, Future models: 16
+============================================================
+Iter    0: loss=2.408749e-02 | grad=1.2898e+00 | lr=9.23e-03
+Iter    1: loss=3.275659e-01 | grad=1.5116e+00 | lr=9.23e-03
+Iter    2: loss=2.748234e-01 | grad=1.6568e+00 | lr=9.23e-03
+Iter    3: loss=2.163102e-01 | grad=1.3439e+00 | lr=9.23e-03
+Iter    4: loss=2.631879e-01 | grad=2.2722e+00 | lr=9.23e-03
+Iter    5: loss=1.162430e-01 | grad=1.0476e+00 | lr=9.23e-03
+Iter    6: loss=1.822100e-01 | grad=2.5435e+00 | lr=9.23e-03
+Iter    7: loss=1.397955e-01 | grad=2.0818e+00 | lr=9.23e-03
+Iter    8: loss=1.543475e-01 | grad=2.0814e+00 | lr=9.23e-03
+Iter    9: loss=1.157136e-01 | grad=1.9585e+00 | lr=9.23e-03
+Iter  100: loss=2.438402e-02 | grad=1.9642e+00 | lr=4.61e-03
+Iter  200: loss=1.408452e-02 | grad=4.6751e-01 | lr=2.31e-03
+Iter  300: loss=1.325216e-02 | grad=5.7858e-01 | lr=1.15e-03
+Iter  400: loss=1.292485e-02 | grad=1.7545e-01 | lr=1.15e-03
+✓ Saved loss history for timestep 34 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_34.json
+
+ Final loss: 1.249764e-02
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=33/50 (t=0.660)
+======================================================================
+
+============================================================
+Training timestep n=33 (BACKWARD STEP)
+Time: t=0.660, Future models: 17
+============================================================
+Iter    0: loss=2.304121e-02 | grad=1.2611e+00 | lr=9.18e-03
+Iter    1: loss=3.394207e-01 | grad=1.7790e+00 | lr=9.18e-03
+Iter    2: loss=3.004010e-01 | grad=1.8469e+00 | lr=9.18e-03
+Iter    3: loss=2.273180e-01 | grad=1.3134e+00 | lr=9.18e-03
+Iter    4: loss=2.043358e-01 | grad=1.7831e+00 | lr=9.18e-03
+Iter    5: loss=2.397964e-01 | grad=2.1009e+00 | lr=9.18e-03
+Iter    6: loss=1.610860e-01 | grad=1.8029e+00 | lr=9.18e-03
+Iter    7: loss=1.642683e-01 | grad=2.5268e+00 | lr=9.18e-03
+Iter    8: loss=1.501058e-01 | grad=1.7732e+00 | lr=9.18e-03
+Iter    9: loss=1.792742e-01 | grad=2.9027e+00 | lr=9.18e-03
+Iter  100: loss=2.412665e-02 | grad=1.2963e+00 | lr=4.59e-03
+Iter  200: loss=1.938394e-02 | grad=1.4960e+00 | lr=4.59e-03
+Iter  300: loss=1.337967e-02 | grad=2.4191e-01 | lr=2.30e-03
+Iter  400: loss=1.316936e-02 | grad=2.4794e-01 | lr=2.30e-03
+✓ Saved loss history for timestep 33 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_33.json
+
+ Final loss: 1.304814e-02
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=32/50 (t=0.640)
+======================================================================
+
+============================================================
+Training timestep n=32 (BACKWARD STEP)
+Time: t=0.640, Future models: 18
+============================================================
+Iter    0: loss=2.246039e-02 | grad=1.1612e+00 | lr=9.14e-03
+Iter    1: loss=2.968220e-01 | grad=1.4929e+00 | lr=9.14e-03
+Iter    2: loss=2.761579e-01 | grad=1.9281e+00 | lr=9.14e-03
+Iter    3: loss=1.926120e-01 | grad=1.1078e+00 | lr=9.14e-03
+Iter    4: loss=1.331231e-01 | grad=1.1491e+00 | lr=9.14e-03
+Iter    5: loss=1.379356e-01 | grad=1.8812e+00 | lr=9.14e-03
+Iter    6: loss=1.364201e-01 | grad=1.5613e+00 | lr=9.14e-03
+Iter    7: loss=1.201064e-01 | grad=2.0113e+00 | lr=9.14e-03
+Iter    8: loss=8.311649e-02 | grad=7.3259e-01 | lr=9.14e-03
+Iter    9: loss=1.359820e-01 | grad=2.7338e+00 | lr=9.14e-03
+Iter  100: loss=1.778295e-02 | grad=1.3740e+00 | lr=4.57e-03
+Iter  200: loss=1.279908e-02 | grad=3.1974e-01 | lr=2.28e-03
+Iter  300: loss=1.306116e-02 | grad=7.3714e-01 | lr=2.28e-03
+Iter  400: loss=1.298341e-02 | grad=1.5713e-01 | lr=1.14e-03
+✓ Saved loss history for timestep 32 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_32.json
+
+ Final loss: 1.244311e-02
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=31/50 (t=0.620)
+======================================================================
+
+============================================================
+Training timestep n=31 (BACKWARD STEP)
+Time: t=0.620, Future models: 19
+============================================================
+Iter    0: loss=2.268414e-02 | grad=1.1241e+00 | lr=9.09e-03
+Iter    1: loss=2.963110e-01 | grad=1.5286e+00 | lr=9.09e-03
+Iter    2: loss=2.836957e-01 | grad=2.1381e+00 | lr=9.09e-03
+Iter    3: loss=2.027178e-01 | grad=1.1918e+00 | lr=9.09e-03
+Iter    4: loss=2.013136e-01 | grad=2.0713e+00 | lr=9.09e-03
+Iter    5: loss=1.418100e-01 | grad=1.5010e+00 | lr=9.09e-03
+Iter    6: loss=7.103039e-02 | grad=1.4521e+00 | lr=9.09e-03
+Iter    7: loss=1.585064e-01 | grad=1.8569e+00 | lr=9.09e-03
+Iter    8: loss=1.394145e-01 | grad=1.2757e+00 | lr=9.09e-03
+Iter    9: loss=1.008010e-01 | grad=1.4450e+00 | lr=9.09e-03
+Iter  100: loss=1.696572e-02 | grad=7.7033e-01 | lr=4.55e-03
+Iter  200: loss=1.262395e-02 | grad=2.3046e-01 | lr=2.27e-03
+Iter  300: loss=1.290901e-02 | grad=1.6448e-01 | lr=2.27e-03
+Iter  400: loss=1.213705e-02 | grad=1.8763e-01 | lr=1.14e-03
+✓ Saved loss history for timestep 31 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_31.json
+
+ Final loss: 1.234271e-02
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=30/50 (t=0.600)
+======================================================================
+
+============================================================
+Training timestep n=30 (BACKWARD STEP)
+Time: t=0.600, Future models: 20
+============================================================
+Iter    0: loss=2.270945e-02 | grad=1.1257e+00 | lr=9.05e-03
+Iter    1: loss=2.643505e-01 | grad=1.4526e+00 | lr=9.05e-03
+Iter    2: loss=2.720015e-01 | grad=2.0820e+00 | lr=9.05e-03
+Iter    3: loss=1.877660e-01 | grad=1.0850e+00 | lr=9.05e-03
+Iter    4: loss=2.000303e-01 | grad=2.0229e+00 | lr=9.05e-03
+Iter    5: loss=1.544808e-01 | grad=1.7379e+00 | lr=9.05e-03
+Iter    6: loss=7.497597e-02 | grad=1.0750e+00 | lr=9.05e-03
+Iter    7: loss=1.712672e-01 | grad=1.9820e+00 | lr=9.05e-03
+Iter    8: loss=1.509763e-01 | grad=1.3632e+00 | lr=9.05e-03
+Iter    9: loss=1.532323e-01 | grad=2.2183e+00 | lr=9.05e-03
+Iter  100: loss=1.919546e-02 | grad=1.3631e+00 | lr=4.52e-03
+Iter  200: loss=1.615407e-02 | grad=1.3683e+00 | lr=2.26e-03
+Iter  300: loss=1.283943e-02 | grad=2.9109e-01 | lr=2.26e-03
+Iter  400: loss=1.248573e-02 | grad=1.8335e-01 | lr=1.13e-03
+✓ Saved loss history for timestep 30 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_30.json
+
+ Final loss: 1.221008e-02
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=29/50 (t=0.580)
+======================================================================
+
+============================================================
+Training timestep n=29 (BACKWARD STEP)
+Time: t=0.580, Future models: 21
+============================================================
+Iter    0: loss=2.242447e-02 | grad=1.0978e+00 | lr=9.00e-03
+Iter    1: loss=2.708075e-01 | grad=1.4887e+00 | lr=9.00e-03
+Iter    2: loss=2.400910e-01 | grad=1.8563e+00 | lr=9.00e-03
+Iter    3: loss=1.598999e-01 | grad=7.7738e-01 | lr=9.00e-03
+Iter    4: loss=1.774448e-01 | grad=2.3774e+00 | lr=9.00e-03
+Iter    5: loss=1.861431e-01 | grad=2.3075e+00 | lr=9.00e-03
+Iter    6: loss=8.785649e-02 | grad=2.0387e+00 | lr=9.00e-03
+Iter    7: loss=1.862606e-01 | grad=2.2081e+00 | lr=9.00e-03
+Iter    8: loss=1.702763e-01 | grad=1.8608e+00 | lr=9.00e-03
+Iter    9: loss=1.060986e-01 | grad=1.2460e+00 | lr=9.00e-03
+Iter  100: loss=2.350564e-02 | grad=1.8322e+00 | lr=4.50e-03
+Iter  200: loss=1.356865e-02 | grad=5.8636e-01 | lr=2.25e-03
+Iter  300: loss=1.214484e-02 | grad=2.1326e-01 | lr=2.25e-03
+Iter  400: loss=1.244468e-02 | grad=1.6674e-01 | lr=1.13e-03
+✓ Saved loss history for timestep 29 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_29.json
+
+ Final loss: 1.231815e-02
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=28/50 (t=0.560)
+======================================================================
+
+============================================================
+Training timestep n=28 (BACKWARD STEP)
+Time: t=0.560, Future models: 22
+============================================================
+Iter    0: loss=2.312158e-02 | grad=1.2445e+00 | lr=8.96e-03
+Iter    1: loss=2.991420e-01 | grad=2.0695e+00 | lr=8.96e-03
+Iter    2: loss=2.508301e-01 | grad=1.8848e+00 | lr=8.96e-03
+Iter    3: loss=1.767905e-01 | grad=1.0748e+00 | lr=8.96e-03
+Iter    4: loss=1.283673e-01 | grad=1.2444e+00 | lr=8.96e-03
+Iter    5: loss=1.281521e-01 | grad=2.3346e+00 | lr=8.96e-03
+Iter    6: loss=2.063705e-01 | grad=2.5763e+00 | lr=8.96e-03
+Iter    7: loss=1.319003e-01 | grad=2.2193e+00 | lr=8.96e-03
+Iter    8: loss=1.916810e-01 | grad=2.4153e+00 | lr=8.96e-03
+Iter    9: loss=1.599633e-01 | grad=2.3566e+00 | lr=8.96e-03
+Iter  100: loss=3.308270e-02 | grad=1.1849e+00 | lr=8.96e-03
+Iter  200: loss=2.277717e-02 | grad=1.9830e+00 | lr=4.48e-03
+Iter  300: loss=1.248738e-02 | grad=3.0467e-01 | lr=2.24e-03
+Iter  400: loss=1.247998e-02 | grad=4.2467e-01 | lr=2.24e-03
+✓ Saved loss history for timestep 28 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_28.json
+
+ Final loss: 1.180575e-02
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=27/50 (t=0.540)
+======================================================================
+
+============================================================
+Training timestep n=27 (BACKWARD STEP)
+Time: t=0.540, Future models: 23
+============================================================
+Iter    0: loss=2.154571e-02 | grad=1.1833e+00 | lr=8.91e-03
+Iter    1: loss=2.530170e-01 | grad=1.7356e+00 | lr=8.91e-03
+Iter    2: loss=2.796924e-01 | grad=2.5649e+00 | lr=8.91e-03
+Iter    3: loss=1.565541e-01 | grad=1.0488e+00 | lr=8.91e-03
+Iter    4: loss=1.284488e-01 | grad=1.7494e+00 | lr=8.91e-03
+Iter    5: loss=1.265877e-01 | grad=2.1627e+00 | lr=8.91e-03
+Iter    6: loss=7.030034e-02 | grad=1.3119e+00 | lr=8.91e-03
+Iter    7: loss=1.332012e-01 | grad=2.2491e+00 | lr=8.91e-03
+Iter    8: loss=9.871670e-02 | grad=1.6589e+00 | lr=8.91e-03
+Iter    9: loss=1.198262e-01 | grad=1.9948e+00 | lr=8.91e-03
+Iter  100: loss=1.809063e-02 | grad=1.4135e+00 | lr=4.46e-03
+Iter  200: loss=1.266884e-02 | grad=5.8928e-01 | lr=2.23e-03
+Iter  300: loss=1.215820e-02 | grad=1.2306e-01 | lr=1.11e-03
+Iter  400: loss=1.177031e-02 | grad=2.1544e-01 | lr=1.11e-03
+✓ Saved loss history for timestep 27 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_27.json
+
+ Final loss: 1.159787e-02
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=26/50 (t=0.520)
+======================================================================
+
+============================================================
+Training timestep n=26 (BACKWARD STEP)
+Time: t=0.520, Future models: 24
+============================================================
+Iter    0: loss=2.143298e-02 | grad=1.0754e+00 | lr=8.87e-03
+Iter    1: loss=2.159377e-01 | grad=1.5053e+00 | lr=8.87e-03
+Iter    2: loss=2.985477e-01 | grad=2.9263e+00 | lr=8.87e-03
+Iter    3: loss=1.557831e-01 | grad=1.2464e+00 | lr=8.87e-03
+Iter    4: loss=1.880909e-01 | grad=2.2077e+00 | lr=8.87e-03
+Iter    5: loss=1.169747e-01 | grad=1.7161e+00 | lr=8.87e-03
+Iter    6: loss=1.421990e-01 | grad=2.1344e+00 | lr=8.87e-03
+Iter    7: loss=1.044203e-01 | grad=2.3569e+00 | lr=8.87e-03
+Iter    8: loss=8.473960e-02 | grad=1.3298e+00 | lr=8.87e-03
+Iter    9: loss=7.049911e-02 | grad=1.4847e+00 | lr=8.87e-03
+Iter  100: loss=1.771444e-02 | grad=8.8862e-01 | lr=4.43e-03
+Iter  200: loss=1.235573e-02 | grad=2.0823e-01 | lr=2.22e-03
+Iter  300: loss=1.196252e-02 | grad=3.1730e-01 | lr=1.11e-03
+Iter  400: loss=1.163609e-02 | grad=6.3892e-02 | lr=5.54e-04
+✓ Saved loss history for timestep 26 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_26.json
+
+ Final loss: 1.212671e-02
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=25/50 (t=0.500)
+======================================================================
+
+============================================================
+Training timestep n=25 (BACKWARD STEP)
+Time: t=0.500, Future models: 25
+============================================================
+Iter    0: loss=2.158387e-02 | grad=1.0683e+00 | lr=8.82e-03
+Iter    1: loss=2.244617e-01 | grad=1.4558e+00 | lr=8.82e-03
+Iter    2: loss=2.400658e-01 | grad=2.6295e+00 | lr=8.82e-03
+Iter    3: loss=1.334492e-01 | grad=1.0881e+00 | lr=8.82e-03
+Iter    4: loss=1.617398e-01 | grad=2.6109e+00 | lr=8.82e-03
+Iter    5: loss=1.392243e-01 | grad=1.8704e+00 | lr=8.82e-03
+Iter    6: loss=5.720324e-02 | grad=1.2404e+00 | lr=8.82e-03
+Iter    7: loss=8.917801e-02 | grad=1.3575e+00 | lr=8.82e-03
+Iter    8: loss=8.430521e-02 | grad=1.1521e+00 | lr=8.82e-03
+Iter    9: loss=5.082022e-02 | grad=6.8650e-01 | lr=8.82e-03
+Iter  100: loss=1.626229e-02 | grad=1.3310e+00 | lr=4.41e-03
+Iter  200: loss=1.515980e-02 | grad=1.1854e+00 | lr=4.41e-03
+Iter  300: loss=1.211895e-02 | grad=4.4561e-01 | lr=4.41e-03
+Iter  400: loss=1.135335e-02 | grad=1.6394e-01 | lr=2.21e-03
+✓ Saved loss history for timestep 25 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_25.json
+
+ Final loss: 1.143438e-02
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=24/50 (t=0.480)
+======================================================================
+
+============================================================
+Training timestep n=24 (BACKWARD STEP)
+Time: t=0.480, Future models: 26
+============================================================
+Iter    0: loss=2.214511e-02 | grad=1.2134e+00 | lr=8.78e-03
+Iter    1: loss=2.140643e-01 | grad=1.5754e+00 | lr=8.78e-03
+Iter    2: loss=2.495898e-01 | grad=2.5032e+00 | lr=8.78e-03
+Iter    3: loss=1.491635e-01 | grad=1.2330e+00 | lr=8.78e-03
+Iter    4: loss=9.888235e-02 | grad=1.3314e+00 | lr=8.78e-03
+Iter    5: loss=1.541136e-01 | grad=2.2609e+00 | lr=8.78e-03
+Iter    6: loss=9.618014e-02 | grad=1.5281e+00 | lr=8.78e-03
+Iter    7: loss=7.072583e-02 | grad=9.8737e-01 | lr=8.78e-03
+Iter    8: loss=8.247046e-02 | grad=1.6700e+00 | lr=8.78e-03
+Iter    9: loss=7.684568e-02 | grad=1.5206e+00 | lr=8.78e-03
+Iter  100: loss=2.278627e-02 | grad=1.2665e+00 | lr=8.78e-03
+Iter  200: loss=1.217106e-02 | grad=5.8948e-01 | lr=4.39e-03
+Iter  300: loss=1.132445e-02 | grad=1.5522e-01 | lr=2.19e-03
+Iter  400: loss=1.120352e-02 | grad=1.7733e-01 | lr=1.10e-03
+✓ Saved loss history for timestep 24 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_24.json
+
+ Final loss: 1.120003e-02
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=23/50 (t=0.460)
+======================================================================
+
+============================================================
+Training timestep n=23 (BACKWARD STEP)
+Time: t=0.460, Future models: 27
+============================================================
+Iter    0: loss=2.106398e-02 | grad=1.0537e+00 | lr=8.73e-03
+Iter    1: loss=1.857430e-01 | grad=1.2806e+00 | lr=8.73e-03
+Iter    2: loss=1.698301e-01 | grad=1.8297e+00 | lr=8.73e-03
+Iter    3: loss=1.879301e-01 | grad=2.6534e+00 | lr=8.73e-03
+Iter    4: loss=1.543810e-01 | grad=2.2312e+00 | lr=8.73e-03
+Iter    5: loss=7.297215e-02 | grad=9.9697e-01 | lr=8.73e-03
+Iter    6: loss=1.077992e-01 | grad=2.4881e+00 | lr=8.73e-03
+Iter    7: loss=6.782605e-02 | grad=1.3235e+00 | lr=8.73e-03
+Iter    8: loss=9.215709e-02 | grad=2.2476e+00 | lr=8.73e-03
+Iter    9: loss=6.404610e-02 | grad=1.8644e+00 | lr=8.73e-03
+Iter  100: loss=1.816255e-02 | grad=4.7138e-01 | lr=4.37e-03
+Iter  200: loss=1.180462e-02 | grad=6.8648e-01 | lr=4.37e-03
+Iter  300: loss=1.119671e-02 | grad=2.4902e-01 | lr=2.18e-03
+Iter  400: loss=1.080718e-02 | grad=1.1360e-01 | lr=1.09e-03
+✓ Saved loss history for timestep 23 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_23.json
+
+ Final loss: 1.135973e-02
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=22/50 (t=0.440)
+======================================================================
+
+============================================================
+Training timestep n=22 (BACKWARD STEP)
+Time: t=0.440, Future models: 28
+============================================================
+Iter    0: loss=2.093263e-02 | grad=1.1005e+00 | lr=8.69e-03
+Iter    1: loss=2.032851e-01 | grad=1.7042e+00 | lr=8.69e-03
+Iter    2: loss=2.264162e-01 | grad=2.6469e+00 | lr=8.69e-03
+Iter    3: loss=1.328790e-01 | grad=1.2544e+00 | lr=8.69e-03
+Iter    4: loss=7.962559e-02 | grad=9.2294e-01 | lr=8.69e-03
+Iter    5: loss=1.248152e-01 | grad=2.1538e+00 | lr=8.69e-03
+Iter    6: loss=6.704988e-02 | grad=1.2877e+00 | lr=8.69e-03
+Iter    7: loss=5.750119e-02 | grad=9.2612e-01 | lr=8.69e-03
+Iter    8: loss=8.305463e-02 | grad=1.8785e+00 | lr=8.69e-03
+Iter    9: loss=6.021719e-02 | grad=1.6659e+00 | lr=8.69e-03
+Iter  100: loss=1.423254e-02 | grad=6.7122e-01 | lr=4.35e-03
+Iter  200: loss=1.146605e-02 | grad=3.5697e-01 | lr=2.17e-03
+Iter  300: loss=1.074431e-02 | grad=2.8525e-01 | lr=2.17e-03
+Iter  400: loss=1.079824e-02 | grad=1.3510e-01 | lr=1.09e-03
+✓ Saved loss history for timestep 22 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_22.json
+
+ Final loss: 1.071749e-02
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=21/50 (t=0.420)
+======================================================================
+
+============================================================
+Training timestep n=21 (BACKWARD STEP)
+Time: t=0.420, Future models: 29
+============================================================
+Iter    0: loss=2.108971e-02 | grad=1.0935e+00 | lr=8.65e-03
+Iter    1: loss=1.697824e-01 | grad=1.2918e+00 | lr=8.65e-03
+Iter    2: loss=1.379840e-01 | grad=1.8490e+00 | lr=8.65e-03
+Iter    3: loss=1.928510e-01 | grad=2.4715e+00 | lr=8.65e-03
+Iter    4: loss=1.425392e-01 | grad=2.2557e+00 | lr=8.65e-03
+Iter    5: loss=5.658221e-02 | grad=1.2165e+00 | lr=8.65e-03
+Iter    6: loss=6.358933e-02 | grad=1.6036e+00 | lr=8.65e-03
+Iter    7: loss=7.494084e-02 | grad=1.5756e+00 | lr=8.65e-03
+Iter    8: loss=3.894052e-02 | grad=1.4859e+00 | lr=8.65e-03
+Iter    9: loss=9.756109e-02 | grad=2.0270e+00 | lr=8.65e-03
+Iter  100: loss=2.382134e-02 | grad=1.7476e+00 | lr=4.32e-03
+Iter  200: loss=1.349181e-02 | grad=1.1533e+00 | lr=4.32e-03
+Iter  300: loss=1.032600e-02 | grad=2.4896e-01 | lr=2.16e-03
+Iter  400: loss=1.029751e-02 | grad=7.0167e-02 | lr=1.08e-03
+✓ Saved loss history for timestep 21 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_21.json
+
+ Final loss: 1.030743e-02
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=20/50 (t=0.400)
+======================================================================
+
+============================================================
+Training timestep n=20 (BACKWARD STEP)
+Time: t=0.400, Future models: 30
+============================================================
+Iter    0: loss=1.997938e-02 | grad=1.0720e+00 | lr=8.60e-03
+Iter    1: loss=1.731123e-01 | grad=1.2831e+00 | lr=8.60e-03
+Iter    2: loss=1.164984e-01 | grad=1.6390e+00 | lr=8.60e-03
+Iter    3: loss=1.490201e-01 | grad=2.3110e+00 | lr=8.60e-03
+Iter    4: loss=9.572779e-02 | grad=1.7606e+00 | lr=8.60e-03
+Iter    5: loss=1.102128e-01 | grad=2.3811e+00 | lr=8.60e-03
+Iter    6: loss=8.066782e-02 | grad=2.3282e+00 | lr=8.60e-03
+Iter    7: loss=1.056272e-01 | grad=1.8478e+00 | lr=8.60e-03
+Iter    8: loss=7.290687e-02 | grad=1.8024e+00 | lr=8.60e-03
+Iter    9: loss=4.651830e-02 | grad=1.3554e+00 | lr=8.60e-03
+Iter  100: loss=1.418463e-02 | grad=6.8314e-01 | lr=8.60e-03
+Iter  200: loss=1.151754e-02 | grad=7.3732e-01 | lr=4.30e-03
+Iter  300: loss=1.026244e-02 | grad=2.2866e-01 | lr=2.15e-03
+Iter  400: loss=1.014538e-02 | grad=1.3163e-01 | lr=1.08e-03
+✓ Saved loss history for timestep 20 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_20.json
+
+ Final loss: 9.989898e-03
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=19/50 (t=0.380)
+======================================================================
+
+============================================================
+Training timestep n=19 (BACKWARD STEP)
+Time: t=0.380, Future models: 31
+============================================================
+Iter    0: loss=2.008721e-02 | grad=1.0807e+00 | lr=8.56e-03
+Iter    1: loss=1.567762e-01 | grad=1.4232e+00 | lr=8.56e-03
+Iter    2: loss=1.814167e-01 | grad=2.4347e+00 | lr=8.56e-03
+Iter    3: loss=1.167427e-01 | grad=1.2121e+00 | lr=8.56e-03
+Iter    4: loss=6.232804e-02 | grad=8.0896e-01 | lr=8.56e-03
+Iter    5: loss=4.700840e-02 | grad=1.9022e+00 | lr=8.56e-03
+Iter    6: loss=9.170905e-02 | grad=2.4136e+00 | lr=8.56e-03
+Iter    7: loss=5.831315e-02 | grad=1.4486e+00 | lr=8.56e-03
+Iter    8: loss=1.125944e-01 | grad=2.2078e+00 | lr=8.56e-03
+Iter    9: loss=7.262942e-02 | grad=2.1163e+00 | lr=8.56e-03
+Iter  100: loss=1.305094e-02 | grad=4.6114e-01 | lr=4.28e-03
+Iter  200: loss=1.313758e-02 | grad=1.2467e+00 | lr=2.14e-03
+Iter  300: loss=1.012781e-02 | grad=1.4328e-01 | lr=2.14e-03
+Iter  400: loss=1.003767e-02 | grad=3.1878e-01 | lr=2.14e-03
+✓ Saved loss history for timestep 19 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_19.json
+
+ Final loss: 9.799629e-03
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=18/50 (t=0.360)
+======================================================================
+
+============================================================
+Training timestep n=18 (BACKWARD STEP)
+Time: t=0.360, Future models: 32
+============================================================
+Iter    0: loss=1.951692e-02 | grad=1.1121e+00 | lr=8.52e-03
+Iter    1: loss=1.389399e-01 | grad=1.3512e+00 | lr=8.52e-03
+Iter    2: loss=1.927377e-01 | grad=2.5160e+00 | lr=8.52e-03
+Iter    3: loss=1.162441e-01 | grad=2.3849e+00 | lr=8.52e-03
+Iter    4: loss=7.625180e-02 | grad=1.8871e+00 | lr=8.52e-03
+Iter    5: loss=1.090184e-01 | grad=2.3636e+00 | lr=8.52e-03
+Iter    6: loss=8.376941e-02 | grad=2.2262e+00 | lr=8.52e-03
+Iter    7: loss=6.504749e-02 | grad=1.2910e+00 | lr=8.52e-03
+Iter    8: loss=5.569728e-02 | grad=1.5570e+00 | lr=8.52e-03
+Iter    9: loss=4.239720e-02 | grad=1.3690e+00 | lr=8.52e-03
+Iter  100: loss=1.147769e-02 | grad=7.1285e-01 | lr=8.52e-03
+Iter  200: loss=1.198633e-02 | grad=8.2114e-01 | lr=4.26e-03
+Iter  300: loss=9.499833e-03 | grad=1.4901e-01 | lr=2.13e-03
+Iter  400: loss=9.292487e-03 | grad=2.7701e-01 | lr=1.06e-03
+✓ Saved loss history for timestep 18 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_18.json
+
+ Final loss: 9.638644e-03
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=17/50 (t=0.340)
+======================================================================
+
+============================================================
+Training timestep n=17 (BACKWARD STEP)
+Time: t=0.340, Future models: 33
+============================================================
+Iter    0: loss=1.959487e-02 | grad=9.9394e-01 | lr=8.48e-03
+Iter    1: loss=1.112479e-01 | grad=1.3465e+00 | lr=8.48e-03
+Iter    2: loss=2.234236e-01 | grad=2.5467e+00 | lr=8.48e-03
+Iter    3: loss=6.278928e-02 | grad=1.7915e+00 | lr=8.48e-03
+Iter    4: loss=4.478448e-02 | grad=8.1480e-01 | lr=8.48e-03
+Iter    5: loss=8.692056e-02 | grad=2.4587e+00 | lr=8.48e-03
+Iter    6: loss=4.272386e-02 | grad=1.2413e+00 | lr=8.48e-03
+Iter    7: loss=9.172695e-02 | grad=2.5237e+00 | lr=8.48e-03
+Iter    8: loss=5.827136e-02 | grad=2.2776e+00 | lr=8.48e-03
+Iter    9: loss=7.320146e-02 | grad=1.9791e+00 | lr=8.48e-03
+Iter  100: loss=1.774612e-02 | grad=1.7348e+00 | lr=8.48e-03
+Iter  200: loss=9.309346e-03 | grad=5.2712e-01 | lr=4.24e-03
+Iter  300: loss=9.313195e-03 | grad=3.6532e-01 | lr=2.12e-03
+Iter  400: loss=8.833997e-03 | grad=1.8487e-01 | lr=5.30e-04
+✓ Saved loss history for timestep 17 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_17.json
+
+ Final loss: 8.934587e-03
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=16/50 (t=0.320)
+======================================================================
+
+============================================================
+Training timestep n=16 (BACKWARD STEP)
+Time: t=0.320, Future models: 34
+============================================================
+Iter    0: loss=1.859944e-02 | grad=1.0333e+00 | lr=8.43e-03
+Iter    1: loss=1.302074e-01 | grad=1.4963e+00 | lr=8.43e-03
+Iter    2: loss=2.508341e-01 | grad=2.8175e+00 | lr=8.43e-03
+Iter    3: loss=7.523079e-02 | grad=1.1398e+00 | lr=8.43e-03
+Iter    4: loss=1.040888e-01 | grad=2.2991e+00 | lr=8.43e-03
+Iter    5: loss=8.977924e-02 | grad=1.6581e+00 | lr=8.43e-03
+Iter    6: loss=4.052946e-02 | grad=1.1520e+00 | lr=8.43e-03
+Iter    7: loss=7.424575e-02 | grad=1.6414e+00 | lr=8.43e-03
+Iter    8: loss=1.019934e-01 | grad=1.8611e+00 | lr=8.43e-03
+Iter    9: loss=9.197551e-02 | grad=1.7174e+00 | lr=8.43e-03
+Iter  100: loss=1.238368e-02 | grad=5.2884e-01 | lr=8.43e-03
+Iter  200: loss=1.459798e-02 | grad=1.6983e+00 | lr=4.22e-03
+Iter  300: loss=9.203919e-03 | grad=4.7057e-01 | lr=4.22e-03
+Iter  400: loss=8.550479e-03 | grad=3.0411e-01 | lr=2.11e-03
+✓ Saved loss history for timestep 16 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_16.json
+
+ Final loss: 8.560150e-03
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=15/50 (t=0.300)
+======================================================================
+
+============================================================
+Training timestep n=15 (BACKWARD STEP)
+Time: t=0.300, Future models: 35
+============================================================
+Iter    0: loss=1.864511e-02 | grad=1.0241e+00 | lr=8.39e-03
+Iter    1: loss=1.206010e-01 | grad=1.3857e+00 | lr=8.39e-03
+Iter    2: loss=1.347227e-01 | grad=2.6586e+00 | lr=8.39e-03
+Iter    3: loss=1.314399e-01 | grad=1.9987e+00 | lr=8.39e-03
+Iter    4: loss=4.598008e-02 | grad=9.0875e-01 | lr=8.39e-03
+Iter    5: loss=1.582303e-01 | grad=2.3775e+00 | lr=8.39e-03
+Iter    6: loss=1.187357e-01 | grad=2.2812e+00 | lr=8.39e-03
+Iter    7: loss=6.756775e-02 | grad=2.1564e+00 | lr=8.39e-03
+Iter    8: loss=7.554202e-02 | grad=2.2312e+00 | lr=8.39e-03
+Iter    9: loss=4.901097e-02 | grad=1.4346e+00 | lr=8.39e-03
+Iter  100: loss=1.112119e-02 | grad=1.0465e+00 | lr=8.39e-03
+Iter  200: loss=9.041796e-03 | grad=7.4844e-01 | lr=4.20e-03
+Iter  300: loss=8.252930e-03 | grad=1.3745e-01 | lr=2.10e-03
+Iter  400: loss=8.060669e-03 | grad=3.0378e-01 | lr=2.10e-03
+✓ Saved loss history for timestep 15 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_15.json
+
+ Final loss: 8.385142e-03
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=14/50 (t=0.280)
+======================================================================
+
+============================================================
+Training timestep n=14 (BACKWARD STEP)
+Time: t=0.280, Future models: 36
+============================================================
+Iter    0: loss=1.835845e-02 | grad=1.0070e+00 | lr=8.35e-03
+Iter    1: loss=1.185476e-01 | grad=1.4288e+00 | lr=8.35e-03
+Iter    2: loss=1.873704e-01 | grad=2.6190e+00 | lr=8.35e-03
+Iter    3: loss=8.254763e-02 | grad=1.5108e+00 | lr=8.35e-03
+Iter    4: loss=3.153858e-02 | grad=6.9279e-01 | lr=8.35e-03
+Iter    5: loss=5.723339e-02 | grad=2.4518e+00 | lr=8.35e-03
+Iter    6: loss=7.155891e-02 | grad=1.8438e+00 | lr=8.35e-03
+Iter    7: loss=3.217772e-02 | grad=1.0713e+00 | lr=8.35e-03
+Iter    8: loss=5.415734e-02 | grad=2.0057e+00 | lr=8.35e-03
+Iter    9: loss=5.544088e-02 | grad=1.5382e+00 | lr=8.35e-03
+Iter  100: loss=1.622633e-02 | grad=1.7536e+00 | lr=8.35e-03
+Iter  200: loss=1.010605e-02 | grad=1.2035e+00 | lr=4.17e-03
+Iter  300: loss=7.783841e-03 | grad=2.0313e-01 | lr=4.17e-03
+Iter  400: loss=7.663245e-03 | grad=1.8697e-01 | lr=2.09e-03
+✓ Saved loss history for timestep 14 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_14.json
+
+ Final loss: 7.597322e-03
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=13/50 (t=0.260)
+======================================================================
+
+============================================================
+Training timestep n=13 (BACKWARD STEP)
+Time: t=0.260, Future models: 37
+============================================================
+Iter    0: loss=1.805183e-02 | grad=9.6966e-01 | lr=8.31e-03
+Iter    1: loss=1.048288e-01 | grad=1.3704e+00 | lr=8.31e-03
+Iter    2: loss=1.709026e-01 | grad=2.5854e+00 | lr=8.31e-03
+Iter    3: loss=8.432465e-02 | grad=1.8178e+00 | lr=8.31e-03
+Iter    4: loss=3.061068e-02 | grad=1.3269e+00 | lr=8.31e-03
+Iter    5: loss=5.872047e-02 | grad=2.4869e+00 | lr=8.31e-03
+Iter    6: loss=3.504553e-02 | grad=1.2146e+00 | lr=8.31e-03
+Iter    7: loss=3.563146e-02 | grad=2.0996e+00 | lr=8.31e-03
+Iter    8: loss=6.122347e-02 | grad=1.7260e+00 | lr=8.31e-03
+Iter    9: loss=3.976442e-02 | grad=1.2078e+00 | lr=8.31e-03
+Iter  100: loss=1.129669e-02 | grad=1.3128e+00 | lr=8.31e-03
+Iter  200: loss=7.560054e-03 | grad=3.0589e-01 | lr=4.15e-03
+Iter  300: loss=7.327194e-03 | grad=3.3495e-01 | lr=2.08e-03
+Iter  400: loss=7.229606e-03 | grad=1.2165e-01 | lr=1.04e-03
+✓ Saved loss history for timestep 13 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_13.json
+
+ Final loss: 7.061958e-03
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=12/50 (t=0.240)
+======================================================================
+
+============================================================
+Training timestep n=12 (BACKWARD STEP)
+Time: t=0.240, Future models: 38
+============================================================
+Iter    0: loss=1.749889e-02 | grad=1.0530e+00 | lr=8.27e-03
+Iter    1: loss=1.132913e-01 | grad=1.6161e+00 | lr=8.27e-03
+Iter    2: loss=2.408077e-01 | grad=2.8354e+00 | lr=8.27e-03
+Iter    3: loss=1.015693e-01 | grad=1.3031e+00 | lr=8.27e-03
+Iter    4: loss=3.316082e-02 | grad=1.0569e+00 | lr=8.27e-03
+Iter    5: loss=7.966381e-02 | grad=1.5109e+00 | lr=8.27e-03
+Iter    6: loss=1.190770e-01 | grad=2.6913e+00 | lr=8.27e-03
+Iter    7: loss=9.169817e-02 | grad=2.4628e+00 | lr=8.27e-03
+Iter    8: loss=5.054542e-02 | grad=1.6937e+00 | lr=8.27e-03
+Iter    9: loss=5.796403e-02 | grad=2.5276e+00 | lr=8.27e-03
+Iter  100: loss=1.084976e-02 | grad=1.3274e+00 | lr=8.27e-03
+Iter  200: loss=1.126063e-02 | grad=1.6051e+00 | lr=4.13e-03
+Iter  300: loss=6.975706e-03 | grad=1.8407e-01 | lr=4.13e-03
+Iter  400: loss=6.865449e-03 | grad=2.0497e-01 | lr=2.07e-03
+✓ Saved loss history for timestep 12 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_12.json
+
+ Final loss: 6.744111e-03
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=11/50 (t=0.220)
+======================================================================
+
+============================================================
+Training timestep n=11 (BACKWARD STEP)
+Time: t=0.220, Future models: 39
+============================================================
+Iter    0: loss=1.673549e-02 | grad=9.7236e-01 | lr=8.22e-03
+Iter    1: loss=9.455771e-02 | grad=1.3634e+00 | lr=8.22e-03
+Iter    2: loss=1.668109e-01 | grad=2.5272e+00 | lr=8.22e-03
+Iter    3: loss=7.084776e-02 | grad=1.1855e+00 | lr=8.22e-03
+Iter    4: loss=2.824614e-02 | grad=9.6417e-01 | lr=8.22e-03
+Iter    5: loss=1.122642e-01 | grad=1.9887e+00 | lr=8.22e-03
+Iter    6: loss=7.169753e-02 | grad=1.4220e+00 | lr=8.22e-03
+Iter    7: loss=1.128191e-01 | grad=2.6227e+00 | lr=8.22e-03
+Iter    8: loss=9.884661e-02 | grad=2.4436e+00 | lr=8.22e-03
+Iter    9: loss=4.548087e-02 | grad=1.0569e+00 | lr=8.22e-03
+Iter  100: loss=1.053941e-02 | grad=1.3002e+00 | lr=4.11e-03
+Iter  200: loss=8.255340e-03 | grad=1.3150e+00 | lr=4.11e-03
+Iter  300: loss=6.350548e-03 | grad=2.8816e-01 | lr=2.06e-03
+Iter  400: loss=6.273872e-03 | grad=8.0068e-02 | lr=5.14e-04
+✓ Saved loss history for timestep 11 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_11.json
+
+ Final loss: 6.407076e-03
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=10/50 (t=0.200)
+======================================================================
+
+============================================================
+Training timestep n=10 (BACKWARD STEP)
+Time: t=0.200, Future models: 40
+============================================================
+Iter    0: loss=1.650369e-02 | grad=9.9406e-01 | lr=8.18e-03
+Iter    1: loss=1.105976e-01 | grad=1.3748e+00 | lr=8.18e-03
+Iter    2: loss=1.475848e-01 | grad=2.5849e+00 | lr=8.18e-03
+Iter    3: loss=7.704040e-02 | grad=1.2519e+00 | lr=8.18e-03
+Iter    4: loss=2.971953e-02 | grad=1.0112e+00 | lr=8.18e-03
+Iter    5: loss=4.114427e-02 | grad=1.1379e+00 | lr=8.18e-03
+Iter    6: loss=5.570989e-02 | grad=2.3715e+00 | lr=8.18e-03
+Iter    7: loss=2.772061e-02 | grad=1.2923e+00 | lr=8.18e-03
+Iter    8: loss=2.378852e-02 | grad=1.0399e+00 | lr=8.18e-03
+Iter    9: loss=2.097190e-02 | grad=1.3416e+00 | lr=8.18e-03
+Iter  100: loss=1.037262e-02 | grad=1.4362e+00 | lr=8.18e-03
+Iter  200: loss=7.590670e-03 | grad=1.2397e+00 | lr=4.09e-03
+Iter  300: loss=5.956754e-03 | grad=2.9852e-01 | lr=2.05e-03
+Iter  400: loss=5.802825e-03 | grad=2.3155e-01 | lr=1.02e-03
+✓ Saved loss history for timestep 10 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_10.json
+
+ Final loss: 5.716593e-03
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=9/50 (t=0.180)
+======================================================================
+
+============================================================
+Training timestep n=9 (BACKWARD STEP)
+Time: t=0.180, Future models: 41
+============================================================
+Iter    0: loss=1.649515e-02 | grad=1.0090e+00 | lr=8.14e-03
+Iter    1: loss=7.983725e-02 | grad=1.3057e+00 | lr=8.14e-03
+Iter    2: loss=1.545383e-01 | grad=2.4722e+00 | lr=8.14e-03
+Iter    3: loss=7.624901e-02 | grad=1.7004e+00 | lr=8.14e-03
+Iter    4: loss=2.623181e-02 | grad=1.0655e+00 | lr=8.14e-03
+Iter    5: loss=2.700060e-02 | grad=1.0527e+00 | lr=8.14e-03
+Iter    6: loss=2.704824e-02 | grad=2.0521e+00 | lr=8.14e-03
+Iter    7: loss=4.106364e-02 | grad=2.1829e+00 | lr=8.14e-03
+Iter    8: loss=2.909039e-02 | grad=1.0576e+00 | lr=8.14e-03
+Iter    9: loss=3.039178e-02 | grad=1.7726e+00 | lr=8.14e-03
+Iter  100: loss=1.102028e-02 | grad=1.0259e+00 | lr=8.14e-03
+Iter  200: loss=6.486500e-03 | grad=9.1785e-01 | lr=4.07e-03
+Iter  300: loss=5.740570e-03 | grad=7.0611e-01 | lr=4.07e-03
+Iter  400: loss=5.468572e-03 | grad=2.4950e-01 | lr=2.04e-03
+✓ Saved loss history for timestep 9 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_9.json
+
+ Final loss: 5.317003e-03
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=8/50 (t=0.160)
+======================================================================
+
+============================================================
+Training timestep n=8 (BACKWARD STEP)
+Time: t=0.160, Future models: 42
+============================================================
+Iter    0: loss=1.652202e-02 | grad=1.0147e+00 | lr=8.10e-03
+Iter    1: loss=6.682660e-02 | grad=1.2201e+00 | lr=8.10e-03
+Iter    2: loss=1.148178e-01 | grad=2.4719e+00 | lr=8.10e-03
+Iter    3: loss=1.041301e-01 | grad=2.0652e+00 | lr=8.10e-03
+Iter    4: loss=2.574514e-02 | grad=1.2059e+00 | lr=8.10e-03
+Iter    5: loss=1.285036e-01 | grad=2.2944e+00 | lr=8.10e-03
+Iter    6: loss=8.121397e-02 | grad=2.1892e+00 | lr=8.10e-03
+Iter    7: loss=7.338196e-02 | grad=2.5568e+00 | lr=8.10e-03
+Iter    8: loss=8.694860e-02 | grad=2.4225e+00 | lr=8.10e-03
+Iter    9: loss=3.163509e-02 | grad=8.0164e-01 | lr=8.10e-03
+Iter  100: loss=2.294089e-02 | grad=1.9638e+00 | lr=8.10e-03
+Iter  200: loss=5.250414e-03 | grad=6.5100e-01 | lr=4.05e-03
+Iter  300: loss=4.796088e-03 | grad=1.4440e-01 | lr=2.03e-03
+Iter  400: loss=4.965902e-03 | grad=1.4029e-01 | lr=1.01e-03
+✓ Saved loss history for timestep 8 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_8.json
+
+ Final loss: 4.764449e-03
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=7/50 (t=0.140)
+======================================================================
+
+============================================================
+Training timestep n=7 (BACKWARD STEP)
+Time: t=0.140, Future models: 43
+============================================================
+Iter    0: loss=1.601700e-02 | grad=1.0375e+00 | lr=8.06e-03
+Iter    1: loss=7.810097e-02 | grad=1.4782e+00 | lr=8.06e-03
+Iter    2: loss=1.659713e-01 | grad=2.5030e+00 | lr=8.06e-03
+Iter    3: loss=7.062689e-02 | grad=1.1653e+00 | lr=8.06e-03
+Iter    4: loss=2.311157e-02 | grad=8.9684e-01 | lr=8.06e-03
+Iter    5: loss=7.003285e-02 | grad=1.4067e+00 | lr=8.06e-03
+Iter    6: loss=1.098267e-01 | grad=2.6799e+00 | lr=8.06e-03
+Iter    7: loss=9.481925e-02 | grad=2.5349e+00 | lr=8.06e-03
+Iter    8: loss=4.890170e-02 | grad=8.7645e-01 | lr=8.06e-03
+Iter    9: loss=6.969513e-02 | grad=2.3040e+00 | lr=8.06e-03
+Iter  100: loss=7.696097e-03 | grad=1.6606e+00 | lr=8.06e-03
+Iter  200: loss=6.129651e-03 | grad=1.3979e+00 | lr=4.03e-03
+Iter  300: loss=4.211657e-03 | grad=1.7071e-01 | lr=2.02e-03
+Iter  400: loss=4.276246e-03 | grad=9.8522e-02 | lr=1.01e-03
+✓ Saved loss history for timestep 7 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_7.json
+
+ Final loss: 4.401160e-03
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=6/50 (t=0.120)
+======================================================================
+
+============================================================
+Training timestep n=6 (BACKWARD STEP)
+Time: t=0.120, Future models: 44
+============================================================
+Iter    0: loss=1.603669e-02 | grad=1.0750e+00 | lr=8.02e-03
+Iter    1: loss=6.497288e-02 | grad=1.4127e+00 | lr=8.02e-03
+Iter    2: loss=1.825963e-01 | grad=2.4805e+00 | lr=8.02e-03
+Iter    3: loss=5.625501e-02 | grad=1.2293e+00 | lr=8.02e-03
+Iter    4: loss=5.267625e-02 | grad=2.2045e+00 | lr=8.02e-03
+Iter    5: loss=8.118625e-02 | grad=1.7708e+00 | lr=8.02e-03
+Iter    6: loss=3.608271e-02 | grad=1.2248e+00 | lr=8.02e-03
+Iter    7: loss=6.461648e-02 | grad=2.3244e+00 | lr=8.02e-03
+Iter    8: loss=4.173487e-02 | grad=1.3083e+00 | lr=8.02e-03
+Iter    9: loss=5.877213e-02 | grad=2.2662e+00 | lr=8.02e-03
+Iter  100: loss=1.240810e-02 | grad=1.9103e+00 | lr=8.02e-03
+Iter  200: loss=3.896513e-03 | grad=3.9419e-01 | lr=4.01e-03
+Iter  300: loss=4.540464e-03 | grad=1.1652e+00 | lr=1.00e-03
+Iter  400: loss=3.786544e-03 | grad=1.2460e-01 | lr=1.00e-03
+✓ Saved loss history for timestep 6 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_6.json
+
+ Final loss: 3.722238e-03
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=5/50 (t=0.100)
+======================================================================
+
+============================================================
+Training timestep n=5 (BACKWARD STEP)
+Time: t=0.100, Future models: 45
+============================================================
+Iter    0: loss=1.552676e-02 | grad=1.1235e+00 | lr=7.98e-03
+Iter    1: loss=5.025490e-02 | grad=1.1374e+00 | lr=7.98e-03
+Iter    2: loss=1.598012e-01 | grad=2.3445e+00 | lr=7.98e-03
+Iter    3: loss=7.167174e-02 | grad=1.7216e+00 | lr=7.98e-03
+Iter    4: loss=2.162731e-02 | grad=1.0238e+00 | lr=7.98e-03
+Iter    5: loss=4.223185e-02 | grad=1.8076e+00 | lr=7.98e-03
+Iter    6: loss=6.190535e-02 | grad=2.1109e+00 | lr=7.98e-03
+Iter    7: loss=3.436684e-02 | grad=1.4090e+00 | lr=7.98e-03
+Iter    8: loss=6.191734e-02 | grad=2.0720e+00 | lr=7.98e-03
+Iter    9: loss=3.710411e-02 | grad=1.9986e+00 | lr=7.98e-03
+Iter  100: loss=5.952335e-03 | grad=1.6688e+00 | lr=7.98e-03
+Iter  200: loss=5.179445e-03 | grad=1.3241e+00 | lr=3.99e-03
+Iter  300: loss=4.715331e-03 | grad=1.3929e+00 | lr=2.00e-03
+Iter  400: loss=3.144641e-03 | grad=1.5710e-01 | lr=2.00e-03
+✓ Saved loss history for timestep 5 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_5.json
+
+ Final loss: 3.049385e-03
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=4/50 (t=0.080)
+======================================================================
+
+============================================================
+Training timestep n=4 (BACKWARD STEP)
+Time: t=0.080, Future models: 46
+============================================================
+Iter    0: loss=1.571543e-02 | grad=1.2074e+00 | lr=7.94e-03
+Iter    1: loss=5.024191e-02 | grad=1.3634e+00 | lr=7.94e-03
+Iter    2: loss=6.596006e-02 | grad=1.6230e+00 | lr=7.94e-03
+Iter    3: loss=1.916899e-01 | grad=2.3861e+00 | lr=7.94e-03
+Iter    4: loss=4.597078e-02 | grad=1.9999e+00 | lr=7.94e-03
+Iter    5: loss=1.072127e-01 | grad=2.2020e+00 | lr=7.94e-03
+Iter    6: loss=6.424449e-02 | grad=2.1126e+00 | lr=7.94e-03
+Iter    7: loss=9.639733e-02 | grad=2.4147e+00 | lr=7.94e-03
+Iter    8: loss=6.673148e-02 | grad=2.3205e+00 | lr=7.94e-03
+Iter    9: loss=6.898309e-02 | grad=2.0649e+00 | lr=7.94e-03
+Iter  100: loss=1.006289e-02 | grad=1.7105e+00 | lr=7.94e-03
+Iter  200: loss=4.109125e-03 | grad=9.8988e-01 | lr=3.97e-03
+Iter  300: loss=2.813138e-03 | grad=5.9454e-01 | lr=3.97e-03
+Iter  400: loss=2.611425e-03 | grad=1.6697e-01 | lr=1.99e-03
+✓ Saved loss history for timestep 4 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_4.json
+
+ Final loss: 2.552993e-03
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=3/50 (t=0.060)
+======================================================================
+
+============================================================
+Training timestep n=3 (BACKWARD STEP)
+Time: t=0.060, Future models: 47
+============================================================
+Iter    0: loss=1.557213e-02 | grad=1.2595e+00 | lr=7.90e-03
+Iter    1: loss=4.120912e-02 | grad=1.0687e+00 | lr=7.90e-03
+Iter    2: loss=9.866099e-02 | grad=2.0824e+00 | lr=7.90e-03
+Iter    3: loss=9.234150e-02 | grad=2.3539e+00 | lr=7.90e-03
+Iter    4: loss=3.642809e-02 | grad=1.8843e+00 | lr=7.90e-03
+Iter    5: loss=1.126031e-01 | grad=2.3807e+00 | lr=7.90e-03
+Iter    6: loss=7.051116e-02 | grad=2.1985e+00 | lr=7.90e-03
+Iter    7: loss=7.270944e-02 | grad=1.5982e+00 | lr=7.90e-03
+Iter    8: loss=3.853865e-02 | grad=1.4784e+00 | lr=7.90e-03
+Iter    9: loss=4.009019e-02 | grad=1.9728e+00 | lr=7.90e-03
+Iter  100: loss=4.825739e-03 | grad=1.8665e+00 | lr=7.90e-03
+Iter  200: loss=3.868306e-03 | grad=1.1451e+00 | lr=3.95e-03
+Iter  300: loss=3.431328e-03 | grad=9.5327e-01 | lr=3.95e-03
+Iter  400: loss=1.934777e-03 | grad=1.6911e-01 | lr=1.98e-03
+✓ Saved loss history for timestep 3 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_3.json
+
+ Final loss: 1.911995e-03
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=2/50 (t=0.040)
+======================================================================
+
+============================================================
+Training timestep n=2 (BACKWARD STEP)
+Time: t=0.040, Future models: 48
+============================================================
+Iter    0: loss=1.597076e-02 | grad=1.3354e+00 | lr=7.86e-03
+Iter    1: loss=6.112004e-02 | grad=1.4773e+00 | lr=7.86e-03
+Iter    2: loss=6.865239e-02 | grad=1.7920e+00 | lr=7.86e-03
+Iter    3: loss=5.610330e-02 | grad=2.1276e+00 | lr=7.86e-03
+Iter    4: loss=2.216464e-02 | grad=9.1097e-01 | lr=7.86e-03
+Iter    5: loss=4.021629e-02 | grad=1.3297e+00 | lr=7.86e-03
+Iter    6: loss=1.592732e-02 | grad=1.0087e+00 | lr=7.86e-03
+Iter    7: loss=3.570513e-02 | grad=1.7473e+00 | lr=7.86e-03
+Iter    8: loss=2.387379e-02 | grad=1.0751e+00 | lr=7.86e-03
+Iter    9: loss=2.403185e-02 | grad=1.6613e+00 | lr=7.86e-03
+Iter  100: loss=9.703040e-03 | grad=2.0366e+00 | lr=7.86e-03
+Iter  200: loss=2.760311e-03 | grad=1.7461e+00 | lr=3.93e-03
+Iter  300: loss=1.722840e-03 | grad=1.2812e+00 | lr=1.97e-03
+Iter  400: loss=1.301435e-03 | grad=1.0056e-01 | lr=9.83e-04
+✓ Saved loss history for timestep 2 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_2.json
+
+ Final loss: 1.340723e-03
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=1/50 (t=0.020)
+======================================================================
+
+============================================================
+Training timestep n=1 (BACKWARD STEP)
+Time: t=0.020, Future models: 49
+============================================================
+Iter    0: loss=1.598409e-02 | grad=1.3681e+00 | lr=7.82e-03
+Iter    1: loss=5.246669e-02 | grad=1.0802e+00 | lr=7.82e-03
+Iter    2: loss=2.193106e-02 | grad=1.1605e+00 | lr=7.82e-03
+Iter    3: loss=3.268663e-02 | grad=1.3511e+00 | lr=7.82e-03
+Iter    4: loss=2.340069e-02 | grad=1.7766e+00 | lr=7.82e-03
+Iter    5: loss=5.039350e-02 | grad=1.9061e+00 | lr=7.82e-03
+Iter    6: loss=2.286410e-02 | grad=2.0446e+00 | lr=7.82e-03
+Iter    7: loss=6.532348e-02 | grad=2.0934e+00 | lr=7.82e-03
+Iter    8: loss=5.182795e-02 | grad=2.2510e+00 | lr=7.82e-03
+Iter    9: loss=1.106827e-02 | grad=1.0961e+00 | lr=7.82e-03
+Iter  100: loss=1.759886e-03 | grad=9.6687e-01 | lr=7.82e-03
+Iter  200: loss=2.823694e-03 | grad=1.9826e+00 | lr=3.91e-03
+Iter  300: loss=9.167234e-04 | grad=6.8826e-01 | lr=9.78e-04
+Iter  400: loss=7.494780e-04 | grad=1.6562e-01 | lr=9.78e-04
+✓ Saved loss history for timestep 1 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_1.json
+
+ Final loss: 7.085086e-04
+Iterations used: 500
+
+======================================================================
+TRAINING TIMESTEP n=0/50 (t=0.000)
+======================================================================
+
+============================================================
+Training timestep n=0 (BACKWARD STEP)
+Time: t=0.000, Future models: 50
+============================================================
+Iter    0: loss=1.618629e-02 | grad=1.4091e+00 | lr=7.78e-03
+Iter    1: loss=6.891763e-02 | grad=1.2234e+00 | lr=7.78e-03
+Iter    2: loss=9.512882e-02 | grad=1.9115e+00 | lr=7.78e-03
+Iter    3: loss=5.502967e-02 | grad=2.2129e+00 | lr=7.78e-03
+Iter    4: loss=2.184970e-02 | grad=2.1286e+00 | lr=7.78e-03
+Iter    5: loss=6.353179e-03 | grad=8.4611e-01 | lr=7.78e-03
+Iter    6: loss=1.571913e-02 | grad=1.1922e+00 | lr=7.78e-03
+Iter    7: loss=1.629917e-02 | grad=1.5454e+00 | lr=7.78e-03
+Iter    8: loss=5.607921e-02 | grad=2.0621e+00 | lr=7.78e-03
+Iter    9: loss=2.309093e-02 | grad=1.8699e+00 | lr=7.78e-03
+Iter  100: loss=4.382100e-03 | grad=1.3946e+00 | lr=3.89e-03
+Iter  200: loss=1.749384e-03 | grad=1.6394e+00 | lr=3.89e-03
+Iter  300: loss=9.119464e-04 | grad=1.7859e+00 | lr=9.73e-04
+Iter  400: loss=5.884827e-04 | grad=1.8780e+00 | lr=4.86e-04
+✓ Saved loss history for timestep 0 to /cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE/nonlinear_2025-11-15_14-11-20/models/loss_history_timestep_0.json
+
+ Final loss: 2.056457e-04
+Iterations used: 500
+Elapsed time: 8.8333 minutes
+
+======================================================================
+VALIDATING AGAINST ANALYTICAL SOLUTION
+======================================================================
+
+Computing Z predictions and analytical values...
+
+======================================================================
+VALIDATION METRICS
+======================================================================
+Y - Overall MSE:         8.455980e-05
+----------------------------------------------------------------------
+Z - Overall MSE:         4.776031e-05
+======================================================================
