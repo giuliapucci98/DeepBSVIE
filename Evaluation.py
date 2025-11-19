@@ -118,7 +118,7 @@ class Result():
             integral_term = self.equation.lam0 * (np.exp(mu_vec * (self.equation.T - times_np)) - 1) / mu_vec
             return np.mean(x * (exp_term + integral_term)[None, :, :], axis=1)
 
-        elif self.example_type in ["example1a", "nonlinear"]:
+        elif self.example_type in [ "nonlinear"]:
             sum_x = np.sum(x, axis=1, keepdims=True)
             Y = times * np.sin(sum_x)
             return Y
@@ -175,8 +175,8 @@ class Result():
                 for s_idx in range(N):
                     cos_term = np.cos(sum_x[:, s_idx])[:, None]
                     # sigma_x = self.equation.sig_base * x_np[:, :, s_idx]
-                    sigma_x = x_np[:, :, s_idx] * sig_vec[None, :]  # [batch_size, dim_x]
-                    z_analytical[:, :, t_idx, s_idx] = times[t_idx] * cos_term * sigma_x
+                    #sigma_x = x_np[:, :, s_idx] * sig_vec[None, :]  # [batch_size, dim_x]
+                    z_analytical[:, :, t_idx, s_idx] = times[t_idx] * cos_term * sig_vec[None,:] #sigma_x
 
         else:
             raise ValueError(f"Unknown example_type: {self.example_type}")

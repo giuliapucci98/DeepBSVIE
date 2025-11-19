@@ -5,7 +5,7 @@ from datetime import datetime
 import json
 
 # =============== SELECT THESE BEFORE STARTING ===========
-example_type = "linear1"  # select example. Options: "linear1", "linear2", "example1a"
+example_type = "nonlinear"  # select example. Options: "linear1", "linear2", "example1a"
 reflected = False
 
 run_name = example_type + "_" + datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
@@ -70,13 +70,13 @@ config = {
     'lr': 1e-2,
     'lr_decay': 0.995,
     'factor_lr_decay': 0.5,
-    'patience_lr_decay': 30,
+    'patience_lr_decay': 70,
     'weight_decay': 1e-5,
     'use_scheduler': True,
     'early_stop_threshold': 1e-5,
     'seed': 42,
     'example_type': example_type,
-    'grad_clip': False,
+    'grad_clip': True,
     'max_grad_norm': 1.0,
 }
 

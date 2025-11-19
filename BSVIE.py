@@ -36,7 +36,8 @@ class volterra_fbsde():
         if self.example_type == "linear1":
             return torch.zeros_like(x)  # Simple Brownian Motion
         if self.example_type in ["linear2", "reflected", "nonlinear"]:
-            return self.mu * x  # GBM
+            #return self.mu * x  # GBM
+            return self.mu 
         else:
             raise ValueError(f"Unknown example_type: {self.example_type}")
 
@@ -44,7 +45,8 @@ class volterra_fbsde():
         batch_size, dim_x = x.shape
         if self.example_type in ["linear2", "reflected", "nonlinear"]:
             sig_matrix = torch.diag(self.sig).unsqueeze(0).expand(batch_size, -1, -1)
-            return sig_matrix * x.unsqueeze(-1)  # scale by x
+            #return sig_matrix * x.unsqueeze(-1)  # scale by x
+            return sig_matrix
         elif self.example_type in ["linear1"]:
             sig_matrix = (torch.eye(dim_x, device=x.device) * self.sig_base).unsqueeze(0).expand(batch_size, -1, -1)  # constant sigma matrix
             return sig_matrix
@@ -71,7 +73,7 @@ class volterra_fbsde():
 
         elif self.example_type == "nonlinear":
             sum_x = x_batch.sum(dim=-1, keepdim=True)  # [batch_size, num_steps, 1]
-            sigma_x = self.sig.view(1, 1, -1) * x_batch  # x_batch: [B, S, dim_x], -> [B, S, dim_x, 1]
+            sigma_x = self.sig.view(1, 1, -1)# * x_batch  # x_batch: [B, S, dim_x], -> [B, S, dim_x, 1]
             norm_sigma_x_sq = (sigma_x.squeeze(-1) ** 2).sum(dim=-1, keepdim=True)  # [B, S, 1]
             term1 = 0.5 * t_n * torch.sin(sum_x) * norm_sigma_x_sq
             # term2: mu^T * sigma^{-1} * Z
