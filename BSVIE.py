@@ -128,7 +128,7 @@ class NN_Y(nn.Module):
         def phi(x):
             h1 = torch.tanh(self.linear1(x))
             h2 = torch.tanh(self.linear2(h1))
-            h3 = torch.tanh(self.linear3(h2 + h1))
+            h3 = torch.tanh(self.linear3(h2))
             # h4 = torch.tanh(self.linear4(h3 + h1))
             return self.linear4(h3)  # [bs,dy] -> [bs,dy]
 
@@ -163,7 +163,7 @@ class NN_Z(nn.Module):
         def phi(x):
             h1 = torch.tanh(self.linear1(x))
             h2 = torch.tanh(self.linear2(h1))
-            h3 = torch.tanh(self.linear3(h2 + h1))
+            h3 = torch.tanh(self.linear3(h2))
             return self.linear4(h3)  # [bs  # [bs,dy*dd] -> [bs,dy*dd]
 
         # xt: [batch_size, dim_x] - current state at time n
