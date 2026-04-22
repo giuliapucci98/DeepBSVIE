@@ -111,6 +111,7 @@ class Result():
             factor2 = (x + np.exp(self.equation.T) - np.exp(times)).mean(axis=1, keepdims=True)
             return factor1 * factor2
 
+
         elif self.example_type == "linear2":
             mu_vec = self.equation.mu.cpu().numpy()[:, None]
             times_np = np.array(times)[None, :]

@@ -31,6 +31,17 @@ class volterra_fbsde():
         # self.mu = self.mu_base * torch.ones(dim_x, device=device) # constant mu
         # self.sig = self.sig_base * torch.ones(dim_x, device=device) # constant sigma
 
+    def kernel(self, t, s):
+        if self.kernel_type == "identity":
+            return 1.0
+        elif self.kernel_type == "exponential":
+            lam = self.kernel_params.get('lambda', 1.0)
+            return np.exp(-lam * (t - s))
+        elif self.kernel_type == "fractional":
+            H = self.kernel_params.get('H', 0.3)
+            return (t - s + 1e-8) ** (H - 0.5)
+        else:
+            raise ValueError(f"Unknown kernel_type: {self.kernel_type}")
 
     def b(self, t, x):
         if self.example_type == "linear1":
@@ -128,7 +139,7 @@ class NN_Y(nn.Module):
         def phi(x):
             h1 = torch.tanh(self.linear1(x))
             h2 = torch.tanh(self.linear2(h1))
-            h3 = torch.tanh(self.linear3(h2))
+            h3 = torch.tanh(self.linear3(h2 + h1))
             # h4 = torch.tanh(self.linear4(h3 + h1))
             return self.linear4(h3)  # [bs,dy] -> [bs,dy]
 
@@ -163,7 +174,7 @@ class NN_Z(nn.Module):
         def phi(x):
             h1 = torch.tanh(self.linear1(x))
             h2 = torch.tanh(self.linear2(h1))
-            h3 = torch.tanh(self.linear3(h2))
+            h3 = torch.tanh(self.linear3(h2 + h1))
             return self.linear4(h3)  # [bs  # [bs,dy*dd] -> [bs,dy*dd]
 
         # xt: [batch_size, dim_x] - current state at time n
@@ -267,18 +278,21 @@ class Solver:
         delta_t = self.equation.T / N
         num_steps = N - start_n
 
-        x_paths = torch.zeros(batch_size, num_steps + 1, self.equation.dim_x, device=device)
+        dim_x = self.equation.dim_x
+
+        x_paths = torch.zeros(batch_size, num_steps + 1, dim_x, device=device)
         w_increments = torch.zeros(batch_size, num_steps, self.equation.dim_d, 1, device=device)
 
-        if start_n == 0:
-            x = self.equation.x_0.expand(batch_size, -1).clone()
-        else:
-            x = self.equation.x_0.expand(batch_size, -1).clone()
+        x = self.equation.x_0.expand(batch_size, -1).clone()
+
+        if start_n > 0:
             for i in range(start_n):
                 w = torch.randn(batch_size, self.equation.dim_d, 1, device=device) * np.sqrt(delta_t)
                 t_current = delta_t * i
-                drift = self.equation.b(t_current, x) * delta_t
-                diffusion = torch.matmul(self.equation.sigma(t_current, x), w).reshape(-1, self.equation.dim_x)
+                t_next = delta_t * (i + 1)
+                k = self.equation.kernel(t_next, t_current)
+                drift = k*self.equation.b(t_current, x) * delta_t
+                diffusion = k* torch.matmul(self.equation.sigma(t_current, x), w).reshape(-1, dim_x)
                 x = x + drift + diffusion
 
         x_paths[:, 0, :] = x
@@ -288,8 +302,10 @@ class Solver:
             w_increments[:, i, :, :] = w
 
             t_current = delta_t * (start_n + i)
-            drift = self.equation.b(t_current, x) * delta_t
-            diffusion = torch.matmul(self.equation.sigma(t_current, x), w).reshape(-1, self.equation.dim_x)
+            t_next = delta_t * (start_n + i + 1)
+            k = self.equation.kernel(t_next, t_current)
+            drift = k* self.equation.b(t_current, x) * delta_t
+            diffusion = k* torch.matmul(self.equation.sigma(t_current, x), w).reshape(-1, dim_x)
             x = x + drift + diffusion
 
             x_paths[:, i + 1, :] = x
@@ -306,8 +322,7 @@ class Solver:
             # Use x_{N-1}, which is at index 0 in x_paths for this iteration
             x_terminal = x_paths[:, 0, :]  # NOT x_paths[:, -1, :]
             if reflected:
-                barrier_val = self.equation.barrier(t_n,
-                                                    x_terminal)  # it's ok as the barrier is constant, we only need y for final dimension
+                barrier_val = self.equation.barrier(t_n,x_terminal)  # it's ok as the barrier is constant, we only need y for final dimension
                 terminal_val = torch.max(self.equation.g(t_n, x_terminal), barrier_val)
             else:
                 terminal_val = self.equation.g(t_n, x_terminal)
