@@ -378,8 +378,9 @@ class Solver:
         exp_term = torch.exp(-(s_expanded - t_n))
         integral_phi_y = (exp_term * y_batch * delta_t).sum(dim=1)  # [batch, dim_y]
 
-        xi_s = torch.exp(s_expanded)  # [1, num_steps, 1]
-        integral_xi_z = (xi_s * z_batch.sum(dim=-1, keepdim=True) * delta_t).sum(dim=1)
+        xi_s = torch.exp(s_expanded)                                 # [1, num_steps, 1]
+        z_xi = (z_batch.sum(dim=-1)) * xi_s                          # [batch, num_steps, dim_y]
+        integral_xi_z = (z_xi * delta_t).sum(dim=1)                  # [batch, dim_y]
 
         x_future = x_paths[:, :-1, :]  # [batch, num_steps, dim_x]
         f_vals = self.equation.f_vectorized(t_n, s_array, x_future, y_batch, z_batch)

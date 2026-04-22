@@ -275,7 +275,7 @@ def validate_against_analytical(equation, example_type, future_models_Y, future_
             wandb.log({
                 f'Y_comparison_sample_{i}': wandb.plot.line_series(
                     xs=times_np,
-                    ys=[Y_predicted_np[idx, 0, :], Y_analytical[idx, 0, :]],
+                    ys=[Y_predicted_np[idx, 0, :], Y_analytical[idx, :]],
                     keys=["Y_predicted", "Y_analytical"],
                     title=f"Sample {idx}: Analytical vs Predicted Y",
                     xname="Time"

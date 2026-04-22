@@ -7,8 +7,8 @@ import json
 # =============== SELECT THESE BEFORE STARTING ===========
 example_type = "linear1"  # select example. Options: "linear1", "linear2", "example1a"
 reflected = False
-Train = False
-USE_WANDB = False
+Train = True 
+USE_WANDB = True 
 
 kernel_type = "exponential"
 kernel_params = {}
@@ -77,7 +77,7 @@ else:
         'dim_h_Y': 40,
         'dim_h_Z': 80,
         'batch_size': 2**12,
-        'itr': 1000,
+        'itr': 500,
         'multiplier': 3,
         'lr': 1e-2,
         'lr_decay': 0.995,
@@ -88,7 +88,7 @@ else:
         'early_stop_threshold': 1e-5,
         'seed': 42,
         'example_type': example_type,
-        'grad_clip': True,
+        'grad_clip': False,
         'max_grad_norm': 1.0,
     }
 

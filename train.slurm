@@ -2,7 +2,7 @@
 #SBATCH -A naiss2025-22-794
 #SBATCH -J myjob
 #SBATCH -p gpu
-#SBATCH -t 02:30:00
+#SBATCH -t 00:40:00
 #SBATCH --nodes=1
 # SBATCH --ntasks-per-node=1
 #SBATCH --output=output.log
@@ -16,7 +16,7 @@ ml PDCOLD/23.12
 ml  singularity/4.1.1-cpeGNU-23.12
 
 
-singularity exec --rocm -B /cfs/klemming /pdc/software/resources/sing_hub/rocm5.7_ubuntu22.04_py3.10_pytorch_2.0.1 python3 train.py
+singularity exec --rocm -B /cfs/klemming /pdc/software/resources/sing_hub/rocm5.7_ubuntu22.04_py3.10_pytorch_2.0.1 python3 main.py
 
 
 
