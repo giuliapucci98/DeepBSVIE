@@ -7,15 +7,15 @@ import json
 # =============== SELECT THESE BEFORE STARTING ===========
 example_type = "linear1"  # select example. Options: "linear1", "linear2", "example1a"
 reflected = False
-Train = True 
-USE_WANDB = True 
+Train = False
+USE_WANDB = False
 
 kernel_type = "exponential"
 kernel_params = {}
 # kernel_params = {'lambda': 1.0}
 # kernel_params = {'H': 0.3}
 
-existing_run_name = f"{example_type}_{kernel_type}_0422_1111"
+existing_run_name = f"{example_type}_{kernel_type}_0422_1333"
 
 run_name = (
     example_type + "_" + kernel_type + "_" + datetime.now().strftime("%m%d_%H%M")

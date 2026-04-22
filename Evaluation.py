@@ -140,6 +140,15 @@ class Result():
             integral_term = self.equation.lam0 * (np.exp(mu_vec * (self.equation.T - times_np)) - 1) / mu_vec
             return np.mean(x * (exp_term + integral_term)[None, :, :], axis=1)[:, None,:]
 
+        elif self.example_type == "linear3":
+            T = self.equation.T
+            factor1 = np.sin(np.pi * times) + (-np.cos(np.pi * self.equation.T) + np.cos(np.pi * times)) / np.pi
+            x_mean = x.mean(axis=1)  # mean over dim_x -> (1000, 51)
+
+            factor2 = np.exp(-(T - times)) * x_mean - (self.equation.T - times)*np.exp(-T)
+
+            return factor1 * factor2
+
         elif self.example_type in [ "nonlinear"]:
             sum_x = np.sum(x, axis=1, keepdims=True)
             Y = times * np.sin(sum_x)
