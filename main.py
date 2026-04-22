@@ -7,14 +7,15 @@ import json
 # =============== SELECT THESE BEFORE STARTING ===========
 example_type = "linear1"  # select example. Options: "linear1", "linear2", "example1a"
 reflected = False
-Train = True
+Train = False
+USE_WANDB = False
 
-kernel_type = "fractional"
+kernel_type = "exponential"
 kernel_params = {}
 # kernel_params = {'lambda': 1.0}
 # kernel_params = {'H': 0.3}
 
-existing_run_name = f"{example_type}_{kernel_type}_2104_1827"
+existing_run_name = f"{example_type}_{kernel_type}_0422_0919"
 
 run_name = (
     example_type + "_" + kernel_type + "_" + datetime.now().strftime("%m%d_%H%M")
@@ -26,20 +27,12 @@ run_name = (
 print("Working directory:", os.getcwd())
 new_folder_flag = True
 new_folder = run_name
-project_dir = "runs/" 
-if os.path.exists(project_dir): #we are on server
-    path = os.path.join(project_dir, new_folder, "models")
-    # Set WandB cache and artifacts directories
-    os.environ['WANDB_CACHE_DIR'] = os.path.join(project_dir, "wandb_cache")
-    os.environ['WANDB_ARTIFACTS_DIR'] = os.path.join(project_dir, "wandb_artifacts")
-    # Make sure directories exist
-    os.makedirs(os.environ['WANDB_CACHE_DIR'], exist_ok=True)
-    os.makedirs(os.environ['WANDB_ARTIFACTS_DIR'], exist_ok=True)
-else:
-    project_dir= os.getcwd()
-    path = os.path.join(new_folder, "models")
+project_dir = "SBSVIEs"
+os.makedirs(project_dir, exist_ok=True)
+path = os.path.join(project_dir, new_folder, "models")
 if new_folder_flag:
     os.makedirs(path, exist_ok=True)
+
 print("State dicts will be saved in:", path)
 
 
@@ -103,15 +96,15 @@ with open(config_path, "w") as f:
     json.dump(config, f, indent=4)
 print(f"Config saved to: {config_path}")
 
-
-wandb.init(
-    project="SBSVIE",
-    name=run_name,
-    config=config,
-    dir=path,
-    tags=[example_type, kernel_type, f"N={config['N']}", "GPU"],
-    reinit=True
-)
+if USE_WANDB:
+    wandb.init(
+        project="SBSVIE",
+        name=run_name,
+        config=config,
+        dir=path,
+        tags=[example_type, kernel_type, f"N={config['N']}", "GPU"],
+        reinit=True
+    )
 
 print(f"\n\n{'#' * 70}")
 print(f"# MODE: {'TRAINING' if Train else 'EVALUATION ONLY'}")
@@ -132,7 +125,7 @@ equation = volterra_fbsde(
     lam=0.5, lam0=0.5, T=T,
     dim_x=dim_x, dim_y=dim_y, dim_d=dim_d,
     example_type=example_type,
-    seed=config.get('seed', 42), kernel_type=kernel_type, kernel_params=kernel_params
+    seed=config.get('seed', 42), kernel_type=kernel_type, kernel_params=kernel_params, USE_WANDB = USE_WANDB
 )
 
 if Train:
@@ -153,7 +146,7 @@ if Train:
 if not reflected:
     future_models_Y = {}
     future_models_Z = {}
-    for n in sorted(all_results.keys()):
+    for n in range(N+1):
         solver = Solver(
             equation,
             config['dim_h_Y'],
@@ -163,8 +156,8 @@ if not reflected:
         )
         model_y_path = os.path.join(path, f"{example_type}_Y_{n}.pt")
         model_z_path = os.path.join(path, f"{example_type}_Z_{n}.pt")
-        solver.modelY.load_state_dict(torch.load(model_y_path))
-        solver.modelZ.load_state_dict(torch.load(model_z_path))
+        solver.modelY.load_state_dict(torch.load(model_y_path, map_location = device))
+        solver.modelZ.load_state_dict(torch.load(model_z_path, map_location = device))
         solver.modelY.eval()
         solver.modelZ.eval()
         future_models_Y[n] = solver.modelY

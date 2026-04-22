@@ -13,7 +13,7 @@ print(device)
 
 
 class volterra_fbsde():
-    def __init__(self, x_0, mu_base, sig_base, lam, lam0, T, dim_x, dim_y, dim_d, example_type, seed, kernel_type, kernel_params):
+    def __init__(self, x_0, mu_base, sig_base, lam, lam0, T, dim_x, dim_y, dim_d, example_type, seed, kernel_type, kernel_params, USE_WANDB):
         self.x_0 = x_0
         self.T = T
         self.dim_x = dim_x
@@ -26,6 +26,7 @@ class volterra_fbsde():
         self.example_type = example_type
         self.kernel_type = kernel_type
         self.kernel_params = kernel_params
+        self.USE_WANDB = USE_WANDB
 
 
         i = torch.linspace(-1, 1, dim_x, device=device)
@@ -280,40 +281,51 @@ class Solver:
     def gen_forward_path(self, batch_size, N, start_n):
         delta_t = self.equation.T / N
         num_steps = N - start_n
-
         dim_x = self.equation.dim_x
 
-        x_paths = torch.zeros(batch_size, num_steps + 1, dim_x, device=device)
-        w_increments = torch.zeros(batch_size, num_steps, self.equation.dim_d, 1, device=device)
+        # Pre-generate ALL Brownian increments from 0 to N
+        all_w = torch.randn(batch_size, N, self.equation.dim_d, 1, device=device) * np.sqrt(delta_t)
+
+        # Cache drift and diffusion integrands at each step j
+        b_cache = []  # b(t_j, X_j) * delta_t,        shape: [batch_size, dim_x]
+        sdw_cache = []  # sigma(t_j, X_j) * dW_j,        shape: [batch_size, dim_x]
 
         x = self.equation.x_0.expand(batch_size, -1).clone()
 
-        if start_n > 0:
-            for i in range(start_n):
-                w = torch.randn(batch_size, self.equation.dim_d, 1, device=device) * np.sqrt(delta_t)
-                t_current = delta_t * i
-                t_next = delta_t * (i + 1)
-                k = self.equation.kernel(t_next, t_current)
-                drift = k*self.equation.b(t_current, x) * delta_t
-                diffusion = k* torch.matmul(self.equation.sigma(t_current, x), w).reshape(-1, dim_x)
-                x = x + drift + diffusion
+        # Simulate ALL N steps from scratch, caching increments
+        x_all = [x]  # x_all[j] = X(t_j)
 
-        x_paths[:, 0, :] = x
+        for j in range(N):
+            t_j = delta_t * j
+            t_next = delta_t * (j + 1)
+            w_j = all_w[:, j, :, :]
 
-        for i in range(num_steps):
-            w = torch.randn(batch_size, self.equation.dim_d, 1, device=device) * np.sqrt(delta_t)
-            w_increments[:, i, :, :] = w
+            b_cache.append(self.equation.b(t_j, x) * delta_t)
+            sdw_cache.append(torch.matmul(self.equation.sigma(t_j, x), w_j).reshape(-1, dim_x))
 
-            t_current = delta_t * (start_n + i)
-            t_next = delta_t * (start_n + i + 1)
-            k = self.equation.kernel(t_next, t_current)
-            drift = k* self.equation.b(t_current, x) * delta_t
-            diffusion = k* torch.matmul(self.equation.sigma(t_current, x), w).reshape(-1, dim_x)
-            x = x + drift + diffusion
+            # X(t_{j+1}) = x_0 + sum_{i=0}^{j} K(t_{j+1}, t_i) * [b_i*dt + sigma_i*dW_i]
+            x_new = self.equation.x_0.expand(batch_size, -1).clone()
+            for i in range(j + 1):
+                t_i = delta_t * i
+                k = self.equation.kernel(t_next, t_i)
+                x_new = x_new + k * b_cache[i] + k * sdw_cache[i]
 
-            x_paths[:, i + 1, :] = x
+            x = x_new
+            x_all.append(x)
+
+        # Extract the recording window [start_n .. N]
+        x_paths = torch.zeros(batch_size, num_steps + 1, dim_x, device=device)
+        w_increments = torch.zeros(batch_size, num_steps, self.equation.dim_d, 1, device=device)
+
+        for idx in range(num_steps + 1):
+            x_paths[:, idx, :] = x_all[start_n + idx]
+
+        for idx in range(num_steps):
+            w_increments[:, idx, :, :] = all_w[:, start_n + idx, :, :]
 
         return x_paths, w_increments
+
+
 
     def volterra_loss(self, x_paths, w_increments, n, y, z_batch, N, future_models_Y, reflected):
         delta_t = self.equation.T / N
@@ -464,29 +476,28 @@ class Solver:
             history['learning_rate'].append(current_lr)
 
             actual_iterations = len(history['loss'])
+            if self.equation.USE_WANDB:
+                wandb_log = {
+                    f'losses/loss_{n}': loss.item(),
+                    f'timestep_{n}/gradient_norm': grad_norm,
+                    f'timestep_{n}/learning_rate': current_lr,
+                    f'timestep_{n}/y_mean': metrics.get('y_mean', y.mean().item()),
+                    f'timestep_{n}/y_std': metrics.get('y_std', y.std().item()),
+                    f'timestep_{n}/z_mean': z_batch.mean().item(),
+                    f'timestep_{n}/z_std': z_batch.std().item(),
+                    f'timestep_{n}/iteration': i,
+                    f'timestep_{n}/actual_iterations': actual_iterations,
+                    f'timestep_{n}/stopped_early': actual_iterations < max_iterations,
+                    f'summary/iterations_used_n_{n}': actual_iterations
 
-            wandb_log = {
-                f'losses/loss_{n}': loss.item(),
-                f'timestep_{n}/gradient_norm': grad_norm,
-                f'timestep_{n}/learning_rate': current_lr,
-                f'timestep_{n}/y_mean': metrics.get('y_mean', y.mean().item()),
-                f'timestep_{n}/y_std': metrics.get('y_std', y.std().item()),
-                f'timestep_{n}/z_mean': z_batch.mean().item(),
-                f'timestep_{n}/z_std': z_batch.std().item(),
-                f'timestep_{n}/iteration': i,
-                f'timestep_{n}/actual_iterations': actual_iterations,
-                f'timestep_{n}/stopped_early': actual_iterations < max_iterations,
-                f'summary/iterations_used_n_{n}': actual_iterations
+                }
+                if not is_terminal:
+                    wandb_log.update({
+                        f'timestep_{n}/integral_z_mean': metrics.get('integral_z_mean', 0),
+                        f'timestep_{n}/estimate_mean': metrics.get('estimate_mean', 0),
+                    })
 
-            }
-
-            if not is_terminal:
-                wandb_log.update({
-                    f'timestep_{n}/integral_z_mean': metrics.get('integral_z_mean', 0),
-                    f'timestep_{n}/estimate_mean': metrics.get('estimate_mean', 0),
-                })
-
-            wandb.log(wandb_log)
+                wandb.log(wandb_log)
 
             if verbose and (i % 100 == 0 or i < 10):
                 print(f"Iter {i:4d}: loss={loss.item():.6e} | "
@@ -593,20 +604,22 @@ def full_backward_training(example_type, config, equation, save_dir, reflected):
             json.dump(loss_data, f, indent=4)
         print(f"✓ Saved loss history for timestep {n} to {json_path}")
 
-        wandb.log({
-            f'summary/timestep_{n}_final_loss': history['loss'][-1],
-            f'summary/timestep_{n}_iterations': info['iterations']
-        })
+        if equation.USE_WANDB:
+            wandb.log({
+                f'summary/timestep_{n}_final_loss': history['loss'][-1],
+                f'summary/timestep_{n}_iterations': info['iterations']
+            })
+            wandb.log({
+                'summary/total_iterations': sum(iteration_counts),
+                'summary/avg_iterations_per_timestep': np.mean(iteration_counts),
+                'summary/max_iterations_used': max(iteration_counts),
+                'summary/min_iterations_used': min(iteration_counts),
+            })
 
         print(f"\n Final loss: {history['loss'][-1]:.6e}")
         print(f"Iterations used: {info['iterations']}")
 
-        wandb.log({
-            'summary/total_iterations': sum(iteration_counts),
-            'summary/avg_iterations_per_timestep': np.mean(iteration_counts),
-            'summary/max_iterations_used': max(iteration_counts),
-            'summary/min_iterations_used': min(iteration_counts),
-        })
+
 
     return all_results, equation
 
