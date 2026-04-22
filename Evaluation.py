@@ -125,12 +125,12 @@ class Result():
         """Compute analytical Y values"""
         if self.example_type == "linear1":
             T = self.equation.T
-            factor1 = np.sin(np.pi * times) + (-np.cos(np.pi * self.equation.T) + np.cos(np.pi * times)) / np.pi
+            factor1 =  np.sin(np.pi * times) + (-np.cos(np.pi * self.equation.T) + np.cos(np.pi * times)) / np.pi
             x_mean = x.mean(axis=1)  # mean over dim_x -> (1000, 51)
 
-            factor2 = np.exp(-(T - times)) * x_mean +  (np.exp(2 * times - T) - np.exp(T)) / 2
+            factor2 =  np.exp(-(T - times)) * x_mean  -  (np.exp(2 * times - T) - np.exp(T)) / 2
 
-            return factor1 * factor2
+            return  factor1 * factor2
 
 
         elif self.example_type == "linear2":
@@ -172,7 +172,7 @@ class Result():
                     # Z^j(t,s) = exp(-(T-s))/d * (sin(pi*t) + (cos(pi*max(t,s)) - cos(pi*T))/pi)
                     # since s >= t in this loop, max(t,s) = s
                     cos_term = (np.cos(pi * s) - np.cos(pi * T)) / pi
-                    z_scalar = np.exp(-(T - s)) / dim_x * (sin_t + cos_term)
+                    z_scalar =  np.exp(-(T - s)) / dim_x * (  sin_t + cos_term)
                     for i in range(dim_x):
                         z_analytical[:, i, t_idx, s_idx] = z_scalar
         elif self.example_type == "linear2":
