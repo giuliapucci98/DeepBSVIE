@@ -33,8 +33,11 @@ class Result():
         for i in range(N):
             w = W[:, :, i].reshape(-1, self.equation.dim_d, 1)
             x_current = x[:, :, i]
-            drift = self.equation.b(delta_t * i, x_current) * delta_t
-            diffusion = torch.matmul(self.equation.sigma(delta_t * i, x_current), w).reshape(-1, self.equation.dim_x)
+            t_current = delta_t * i
+            t_next = delta_t * (i + 1)
+            k = self.equation.kernel(t_next, t_current)
+            drift = k * self.equation.b(t_current, x_current) * delta_t
+            diffusion = k * torch.matmul(self.equation.sigma(t_current, x_current), w).reshape(-1, self.equation.dim_x)
             x[:, :, i + 1] = x_current + drift + diffusion
 
         return x

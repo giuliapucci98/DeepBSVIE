@@ -13,7 +13,7 @@ print(device)
 
 
 class volterra_fbsde():
-    def __init__(self, x_0, mu_base, sig_base, lam, lam0, T, dim_x, dim_y, dim_d, example_type, seed=42):
+    def __init__(self, x_0, mu_base, sig_base, lam, lam0, T, dim_x, dim_y, dim_d, example_type, seed, kernel_type, kernel_params):
         self.x_0 = x_0
         self.T = T
         self.dim_x = dim_x
@@ -24,6 +24,9 @@ class volterra_fbsde():
         self.lam = lam
         self.lam0 = lam0
         self.example_type = example_type
+        self.kernel_type = kernel_type
+        self.kernel_params = kernel_params
+
 
         i = torch.linspace(-1, 1, dim_x, device=device)
         self.mu = self.mu_base * (1 + 0.3 * i)

@@ -5,16 +5,28 @@ from datetime import datetime
 import json
 
 # =============== SELECT THESE BEFORE STARTING ===========
-example_type = "nonlinear"  # select example. Options: "linear1", "linear2", "example1a"
+example_type = "linear1"  # select example. Options: "linear1", "linear2", "example1a"
 reflected = False
+Train = True
 
-run_name = example_type + "_" + datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+kernel_type = "fractional"
+kernel_params = {}
+# kernel_params = {'lambda': 1.0}
+# kernel_params = {'H': 0.3}
+
+existing_run_name = f"{example_type}_{kernel_type}_2104_1827"
+
+run_name = (
+    example_type + "_" + kernel_type + "_" + datetime.now().strftime("%m%d_%H%M")
+    if Train
+    else existing_run_name
+)
 
 #=============== PATH SETUP ====================
 print("Working directory:", os.getcwd())
 new_folder_flag = True
 new_folder = run_name
-project_dir = "/cfs/klemming/projects/supr/naiss2024-22-1707/DeepBSVIE"
+project_dir = "runs/" 
 if os.path.exists(project_dir): #we are on server
     path = os.path.join(project_dir, new_folder, "models")
     # Set WandB cache and artifacts directories
@@ -55,48 +67,55 @@ elif example_type == "reflected":
 else:
     raise ValueError(f"Unknown example_type: {example_type}")
 
-config = {
-    'dim_x': 5,
-    'N': 50,
-    'T': 1.0,
-    'mu_base': mu_base,
-    'sig_base': sig_base,
-    'x0_scale': x0_scale,
-    'dim_h_Y': 40,
-    'dim_h_Z': 80,
-    'batch_size': 2**12,
-    'itr': 1,
-    'multiplier': 3,
-    'lr': 1e-2,
-    'lr_decay': 0.995,
-    'factor_lr_decay': 0.5,
-    'patience_lr_decay': 70,
-    'weight_decay': 1e-5,
-    'use_scheduler': True,
-    'early_stop_threshold': 1e-5,
-    'seed': 42,
-    'example_type': example_type,
-    'grad_clip': True,
-    'max_grad_norm': 1.0,
-}
-
 config_path = os.path.join(project_dir, new_folder, "config.json")
+
+if not Train and os.path.exists(config_path):
+    with open(config_path) as f:
+        config = json.load(f)
+    print(f"Loaded config from: {config_path}")
+else:
+    config = {
+        'dim_x': 1,
+        'N': 50,
+        'T': 1.0,
+        'mu_base': mu_base,
+        'sig_base': sig_base,
+        'x0_scale': x0_scale,
+        'dim_h_Y': 40,
+        'dim_h_Z': 80,
+        'batch_size': 2**12,
+        'itr': 1000,
+        'multiplier': 3,
+        'lr': 1e-2,
+        'lr_decay': 0.995,
+        'factor_lr_decay': 0.5,
+        'patience_lr_decay': 70,
+        'weight_decay': 1e-5,
+        'use_scheduler': True,
+        'early_stop_threshold': 1e-5,
+        'seed': 42,
+        'example_type': example_type,
+        'grad_clip': True,
+        'max_grad_norm': 1.0,
+    }
+
 with open(config_path, "w") as f:
     json.dump(config, f, indent=4)
-print(f"✅ Config saved to: {config_path}")
+print(f"Config saved to: {config_path}")
 
 
 wandb.init(
-    project="bsde-volterra-solver",
+    project="SBSVIE",
     name=run_name,
     config=config,
     dir=path,
-    tags=[example_type, f"N={config['N']}", "GPU"],
+    tags=[example_type, kernel_type, f"N={config['N']}", "GPU"],
     reinit=True
 )
 
 print(f"\n\n{'#' * 70}")
-print(f"# STARTING FULL TRAINING FOR {example_type}")
+print(f"# MODE: {'TRAINING' if Train else 'EVALUATION ONLY'}")
+print(f"# {example_type} — kernel: {kernel_type}")
 print(f"# RUN NAME: {run_name}")
 print(f"{'#' * 70}")
 
@@ -113,21 +132,24 @@ equation = volterra_fbsde(
     lam=0.5, lam0=0.5, T=T,
     dim_x=dim_x, dim_y=dim_y, dim_d=dim_d,
     example_type=example_type,
-    seed=config.get('seed', 42),
+    seed=config.get('seed', 42), kernel_type=kernel_type, kernel_params=kernel_params
 )
-start_time = time.time()
 
-all_results, equation = full_backward_training(
-    example_type=example_type,
-    config=config,
-    equation=equation,
-    save_dir=path, reflected=reflected
-)
-end_time = time.time()
-elapsed_time = (end_time - start_time) / 60  # convert seconds to minutes
-print(f"Elapsed time: {elapsed_time:.4f} minutes")
+if Train:
+    start_time = time.time()
 
-wandb.log({"training/total_time_minutes": elapsed_time})
+    all_results, equation = full_backward_training(
+        example_type=example_type,
+        config=config,
+        equation=equation,
+        save_dir=path, reflected=reflected
+    )
+    end_time = time.time()
+    elapsed_time = (end_time - start_time) / 60  # convert seconds to minutes
+    print(f"Elapsed time: {elapsed_time:.4f} minutes")
+
+    wandb.log({"training/total_time_minutes": elapsed_time})
+
 if not reflected:
     future_models_Y = {}
     future_models_Z = {}
