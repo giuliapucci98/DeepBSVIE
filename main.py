@@ -15,7 +15,7 @@ kernel_params = {}
 # kernel_params = {'lambda': 1.0}
 # kernel_params = {'H': 0.3}
 
-existing_run_name = f"{example_type}_{kernel_type}_0422_0919"
+existing_run_name = f"{example_type}_{kernel_type}_0422_1111"
 
 run_name = (
     example_type + "_" + kernel_type + "_" + datetime.now().strftime("%m%d_%H%M")

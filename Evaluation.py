@@ -160,16 +160,12 @@ class Result():
                 sin_t = np.sin(pi * t)
                 for s_idx in range(t_idx, N):
                     s = times[s_idx]
-                    r_grid = np.linspace(s, T, 200)
-                    dr = r_grid[1] - r_grid[0]
-                    sin_r = np.sin(pi * r_grid)
-                    inner_r = (-np.cos(pi * T) + np.cos(pi * r_grid)) / pi
-                    integrand = np.exp(-(r_grid - t)) * (sin_r + inner_r)
-                    integral_val = np.trapz(integrand, r_grid)
-                    z_scalar = 1 / dim_x * (sin_t + integral_val)
+                    # Z^j(t,s) = exp(-(T-s))/d * (sin(pi*t) + (cos(pi*max(t,s)) - cos(pi*T))/pi)
+                    # since s >= t in this loop, max(t,s) = s
+                    cos_term = (np.cos(pi * s) - np.cos(pi * T)) / pi
+                    z_scalar = np.exp(-(T - s)) / dim_x * (sin_t + cos_term)
                     for i in range(dim_x):
                         z_analytical[:, i, t_idx, s_idx] = z_scalar
-
         elif self.example_type == "linear2":
             mu_vec = self.equation.mu.cpu().numpy()
             sig_vec = self.equation.sig.cpu().numpy()

@@ -373,16 +373,25 @@ class Solver:
             terminal_val = self.equation.g(t_n, x_T)
         # Vectorized f computation over all future timesteps
         s_array = delta_t * torch.arange(n, N, device=device)
+        s_expanded = s_array.view(1, -1, 1)
+
+        exp_term = torch.exp(-(s_expanded - t_n))
+        integral_phi_y = (exp_term * y_batch * delta_t).sum(dim=1)  # [batch, dim_y]
+
+        xi_s = torch.exp(s_expanded)  # [1, num_steps, 1]
+        integral_xi_z = (xi_s * z_batch.sum(dim=-1, keepdim=True) * delta_t).sum(dim=1)
+
         x_future = x_paths[:, :-1, :]  # [batch, num_steps, dim_x]
         f_vals = self.equation.f_vectorized(t_n, s_array, x_future, y_batch, z_batch)
-
         # Integral approximations
-        integral_f = (f_vals * delta_t).sum(dim=1)  # [batch, dim_y]
+        #integral_f = (f_vals * delta_t).sum(dim=1)  # [batch, dim_y]
         z_dot_w = torch.matmul(z_batch, w_increments).squeeze(-1)  # [batch, num_steps, dim_y]
         integral_z = z_dot_w.sum(dim=1)  # [batch, dim_y]
 
         # BSDE equation: Y_n = g(T, X_T) + ∫_n^T f(...) ds - ∫_n^T Z dW
-        estimate = terminal_val + integral_f - integral_z
+        estimate = terminal_val + integral_phi_y + integral_xi_z - integral_z
+
+        #estimate = terminal_val + integral_f - integral_z
         # loss = torch.mean((y - estimate) ** 2)
         loss = torch.mean((y - estimate).norm(2, dim=1))
 
