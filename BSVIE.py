@@ -48,7 +48,7 @@ class volterra_fbsde():
             raise ValueError(f"Unknown kernel_type: {self.kernel_type}")
 
     def b(self, t, x):
-        if self.example_type == "linear1":
+        if self.example_type in [ "linear1", "linear3"]:
             return torch.zeros_like(x)  # Simple Brownian Motion
         if self.example_type in ["linear2", "reflected", "nonlinear"]:
             #return self.mu * x  # GBM
@@ -62,7 +62,7 @@ class volterra_fbsde():
             sig_matrix = torch.diag(self.sig).unsqueeze(0).expand(batch_size, -1, -1)
             #return sig_matrix * x.unsqueeze(-1)  # scale by x
             return sig_matrix
-        elif self.example_type in ["linear1"]:
+        elif self.example_type in [ "linear1", "linear3"]:
             sig_matrix = (torch.eye(dim_x, device=x.device) * self.sig_base).unsqueeze(0).expand(batch_size, -1, -1)  # constant sigma matrix
             return sig_matrix
         else:
@@ -113,7 +113,7 @@ class volterra_fbsde():
             raise ValueError(f"Unknown example_type: {self.example_type}")
 
     def g(self, t, x):
-        if self.example_type == "linear1":
+        if self.example_type in [ "linear1", "linear3"]:
             return np.sin(np.pi * t) * (x.sum(dim=-1, keepdim=True) / self.dim_x)
         elif self.example_type == "linear2":
             return np.exp(-self.lam0 * t) * (x.mean(dim=1, keepdim=True))

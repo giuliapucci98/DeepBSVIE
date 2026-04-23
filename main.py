@@ -5,7 +5,7 @@ from datetime import datetime
 import json
 
 # =============== SELECT THESE BEFORE STARTING ===========
-example_type = "linear1"  # select example. Options: "linear1", "linear2", "example1a"
+example_type = "linear2"  # select example. Options: "linear1", "linear2", "example1a"
 reflected = False
 Train = False
 USE_WANDB = False
@@ -15,7 +15,7 @@ kernel_params = {}
 # kernel_params = {'lambda': 1.0}
 # kernel_params = {'H': 0.3}
 
-existing_run_name = f"{example_type}_{kernel_type}_0422_1333"
+existing_run_name = f"{example_type}_{kernel_type}_0422_2058"
 
 run_name = (
     example_type + "_" + kernel_type + "_" + datetime.now().strftime("%m%d_%H%M")
@@ -49,7 +49,7 @@ if torch.cuda.is_available():
 
 
 # Set parameters depending on the example type
-if example_type == "linear1":
+if example_type in [ "linear1", "linear3"]:
     mu_base, sig_base, x0_scale = 0.0, 1.0, 0.0
 elif example_type == "linear2":
     mu_base, sig_base, x0_scale = 0.1, 0.5, 1.0

@@ -130,24 +130,25 @@ class Result():
 
             factor2 =  np.exp(-(T - times)) * x_mean  -  (np.exp(2 * times - T) - np.exp(T)) / 2
 
-            return  factor1 * factor2
-
+            return  (factor1 * factor2)[:, None, :]
 
         elif self.example_type == "linear2":
-            mu_vec = self.equation.mu.cpu().numpy()[:, None]
-            times_np = np.array(times)[None, :]
-            exp_term = np.exp(-self.equation.lam * times_np) * np.exp(mu_vec * (self.equation.T - times_np))
-            integral_term = self.equation.lam0 * (np.exp(mu_vec * (self.equation.T - times_np)) - 1) / mu_vec
-            return np.mean(x * (exp_term + integral_term)[None, :, :], axis=1)[:, None,:]
+            mu_vec = self.equation.mu.cpu().numpy()[:, None]  # (d, 1)
+            times_np = np.array(times)[None, :]  # (1, T)
+            tau = self.equation.T - times_np  # (1, T)  time to maturity
+            phi = 1 + mu_vec * tau  # (d, T)
+            exp_term = np.exp(-self.equation.lam * times_np) * phi  # (d, T)
+            integral_term = self.equation.lam0 * (tau + mu_vec * tau ** 2 / 2)  # (d, T)
+            return np.mean(x * (exp_term + integral_term)[None, :, :], axis=1)[:, None, :]
 
         elif self.example_type == "linear3":
             T = self.equation.T
             factor1 = np.sin(np.pi * times) + (-np.cos(np.pi * self.equation.T) + np.cos(np.pi * times)) / np.pi
             x_mean = x.mean(axis=1)  # mean over dim_x -> (1000, 51)
 
-            factor2 = np.exp(-(T - times)) * x_mean - (self.equation.T - times)*np.exp(-T)
+            factor2 = np.exp(-(T - times)) * x_mean + (self.equation.T - times)*np.exp(-T)
 
-            return factor1 * factor2
+            return (factor1 * factor2)[:, None, :]
 
         elif self.example_type in [ "nonlinear"]:
             sum_x = np.sum(x, axis=1, keepdims=True)
@@ -162,7 +163,7 @@ class Result():
         batch_size, dim_x, N, _ = z.shape
         z_analytical = np.zeros_like(z)
 
-        if self.example_type == "linear1":
+        if self.example_type in [ "linear1", "linear3"]:
             pi = np.pi
             for t_idx in range(N):
                 t = times[t_idx]
@@ -227,8 +228,6 @@ def validate_against_analytical(equation, example_type, future_models_Y, future_
     x_np = x.cpu().numpy()
     times = np.linspace(0, equation.T, N + 1)
 
-    print(times.shape)  # should be [batch, 1] or [1, N]
-    print(x_np.shape)
 
     Y_analytical = result.analytical_Y(times, x_np)  # Shape: [batch_size, 1, N+1]
     Y_predicted = result.predict_Y(x, N, future_models_Y)  # [batch_size, 1, N+1]
@@ -284,7 +283,7 @@ def validate_against_analytical(equation, example_type, future_models_Y, future_
             wandb.log({
                 f'Y_comparison_sample_{i}': wandb.plot.line_series(
                     xs=times_np,
-                    ys=[Y_predicted_np[idx, 0, :], Y_analytical[idx, :]],
+                    ys=[Y_predicted_np[idx, 0, :], Y_analytical[idx,0, :]],
                     keys=["Y_predicted", "Y_analytical"],
                     title=f"Sample {idx}: Analytical vs Predicted Y",
                     xname="Time"
@@ -381,7 +380,7 @@ def validate_against_analytical(equation, example_type, future_models_Y, future_
                      color=c, linestyle='-', alpha=0.9)
 
             # analytical = dashed SAME color
-            plt.plot(times_np, Y_analytical[idx, :],
+            plt.plot(times_np, Y_analytical[idx,0, :],
                      color=c, linestyle='--', alpha=0.9)
         plt.title("Y: Predicted vs Analytical (all samples)")
         plt.xlabel("Time")
