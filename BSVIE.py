@@ -48,7 +48,7 @@ class volterra_fbsde():
             raise ValueError(f"Unknown kernel_type: {self.kernel_type}")
 
     def b(self, t, x):
-        if self.example_type in [ "linear1", "linear3"]:
+        if self.example_type == "linear1":
             return torch.zeros_like(x)  # Simple Brownian Motion
         if self.example_type in ["linear2", "reflected", "nonlinear"]:
             #return self.mu * x  # GBM
@@ -62,7 +62,7 @@ class volterra_fbsde():
             sig_matrix = torch.diag(self.sig).unsqueeze(0).expand(batch_size, -1, -1)
             #return sig_matrix * x.unsqueeze(-1)  # scale by x
             return sig_matrix
-        elif self.example_type in [ "linear1", "linear3"]:
+        elif self.example_type in ["linear1"]:
             sig_matrix = (torch.eye(dim_x, device=x.device) * self.sig_base).unsqueeze(0).expand(batch_size, -1, -1)  # constant sigma matrix
             return sig_matrix
         else:
@@ -80,19 +80,17 @@ class volterra_fbsde():
             indicator = (s_expanded >= t_n).to(y_batch.dtype)
             exp_term = torch.exp(-(s_expanded - t_n))
             term1 = exp_term * indicator * y_batch
-            term2 = torch.exp(s_expanded) * z_batch.sum(dim=-1)
+            #term2 = torch.exp(s_expanded) * z_batch.sum(dim=-1)
+
+            # BSDE equation: Y_n = g(T, X_T) + ∫_n^T f(...) ds - ∫_n^T Z dW
+            xi_s = torch.exp(s_expanded)                                 # [1, num_steps, 1]
+            term2 = (z_batch.sum(dim=-1)) * xi_s                          # [batch, num_steps, dim_y]
+
+            # integral_phi_y + integral_xi_z
             return term1 + term2
 
         elif self.example_type == "linear2":
             return self.lam0 * x_batch.mean(dim=2, keepdim=True)
-
-        elif self.example_type == "linear3":
-            s_expanded = s_array.view(1, -1, 1)
-            indicator = (s_expanded >= t_n).to(y_batch.dtype)
-            exp_term = torch.exp(-(s_expanded - t_n))
-            term1 = exp_term * indicator * y_batch
-            term2 = torch.exp(-s_expanded) * z_batch.sum(dim=-1)
-            return term1 + term2
 
         elif self.example_type == "nonlinear":
             sum_x = x_batch.sum(dim=-1, keepdim=True)  # [batch_size, num_steps, 1]
@@ -113,7 +111,7 @@ class volterra_fbsde():
             raise ValueError(f"Unknown example_type: {self.example_type}")
 
     def g(self, t, x):
-        if self.example_type in [ "linear1", "linear3"]:
+        if self.example_type == "linear1":
             return np.sin(np.pi * t) * (x.sum(dim=-1, keepdim=True) / self.dim_x)
         elif self.example_type == "linear2":
             return np.exp(-self.lam0 * t) * (x.mean(dim=1, keepdim=True))
@@ -286,7 +284,7 @@ class Solver:
 
         self.base_lr = lr
 
-    def gen_forward_path(self, batch_size, N, start_n):
+    def gen_forward_path2(self, batch_size, N, start_n):
         delta_t = self.equation.T / N
         num_steps = N - start_n
         dim_x = self.equation.dim_x
@@ -332,6 +330,128 @@ class Solver:
             w_increments[:, idx, :, :] = all_w[:, start_n + idx, :, :]
 
         return x_paths, w_increments
+
+    def gen_forward_path(self, batch_size, N, start_n):
+        delta_t = self.equation.T / N
+        dim_x = self.equation.dim_x
+        num_steps = N - start_n
+
+        x0 = self.equation.x_0.expand(batch_size, -1)  # [batch, dim_x]
+
+        # ── Branch: standard GBM (identity kernel, linear2 example)
+        # No Volterra structure — standard multiplicative Euler-Maruyama.
+        if self.equation.example_type == "linear2" and self.equation.kernel_type == "identity":
+            x_all = torch.zeros(N + 1, batch_size, dim_x, device=device)
+            x_all[0] = x0
+
+            dW = torch.randn(N, batch_size, self.equation.dim_d, device=device) * (delta_t ** 0.5)
+
+            x = x0.clone()
+            for j in range(N):
+                t_j = delta_t * j
+                # GBM step: x_{j+1} = x_j + mu*x_j*dt + sigma*x_j*dW_j
+                drift     = self.equation.b(t_j, x) * delta_t             # mu * x * dt  [batch, dim_x]
+                sig_mat   = self.equation.sigma(t_j, x)                   # [batch, dim_x, dim_d]
+                diffusion = torch.matmul(sig_mat, dW[j].unsqueeze(-1)).squeeze(-1)  # [batch, dim_x]
+                x = x + drift + diffusion
+                x_all[j + 1] = x
+
+            x_paths      = x_all[start_n : start_n + num_steps + 1].permute(1, 0, 2).contiguous()
+            w_increments = dW[start_n : start_n + num_steps].permute(1, 0, 2).unsqueeze(-1)
+            return x_paths, w_increments
+
+        # ── Branch: Volterra GBM (exponential / fractional kernel, linear2 example)
+        # Work in log-space: log X is arithmetic, so the kernel matmul applies exactly.
+        if self.equation.example_type == "linear2" and self.equation.kernel_type != "identity":
+
+            # 1. Build kernel matrix (same as before)
+            t_future = delta_t * torch.arange(1, N + 1, device=device)
+            t_past   = delta_t * torch.arange(0, N,     device=device)
+            diff     = t_future.unsqueeze(1) - t_past.unsqueeze(0)        # [N, N]
+            mask     = (diff > 0).float()
+
+            if self.equation.kernel_type == "exponential":
+                lam   = self.equation.kernel_params.get('lambda', 1.0)
+                K_mat = torch.exp(-lam * diff) * mask
+            elif self.equation.kernel_type == "fractional":
+                H     = self.equation.kernel_params.get('H', 0.3)
+                K_mat = (diff.clamp(min=1e-8) ** (H - 0.5)) * mask
+            # K_mat: [N, N]
+
+            # 2. Log-space arithmetic increments
+            # For GBM: d(log X^i) = (mu_i - 0.5*sig_i^2)*dt + sig_i*dW^i
+            # These are CONSTANT (do not depend on x), so precomputation is exact.
+            dW = torch.randn(N, batch_size, self.equation.dim_d, device=device) * (delta_t ** 0.5)
+            # dW: [N, batch, dim_d]
+
+            mu  = self.equation.mu.view(1, 1, dim_x)    # [1, 1, dim_x]
+            sig = self.equation.sig.view(1, 1, dim_x)   # [1, 1, dim_x]
+
+            # drift in log-space: (mu - 0.5*sig^2)*dt, broadcast over [N, batch, dim_x]
+            log_drift = (mu - 0.5 * sig ** 2) * delta_t                   # [1, 1, dim_x]
+            log_drift = log_drift.expand(N, batch_size, dim_x)            # [N, batch, dim_x]
+
+            # diffusion in log-space: sig_i * dW^i (diagonal sigma, so component-wise)
+            log_diff  = sig * dW                                           # [N, batch, dim_x]
+
+            log_increments = log_drift + log_diff                          # [N, batch, dim_x]
+
+            # 3. Kernel matmul in log-space
+            # log X(t_{j+1}) = log x_0 + sum_i K[j,i] * log_increment[i]
+            log_x0   = torch.log(x0.clamp(min=1e-8)).unsqueeze(0)         # [1, batch, dim_x]
+            log_x_all = log_x0 + torch.einsum("ji, ibd -> jbd", K_mat, log_increments)
+            # log_x_all: [N, batch, dim_x]
+
+            # 4. Exponentiate to recover X
+            x_all = torch.cat([
+                x0.unsqueeze(0),
+                torch.exp(log_x_all)
+            ], dim=0)                                                      # [N+1, batch, dim_x]
+
+            x_paths      = x_all[start_n : start_n + num_steps + 1].permute(1, 0, 2).contiguous()
+            w_increments = dW[start_n : start_n + num_steps].permute(1, 0, 2).unsqueeze(-1)
+            return x_paths, w_increments
+
+        # ── Default branch: arithmetic / linear SDE (linear1, nonlinear, reflected)
+        # Kernel matmul on raw increments — exact because b and sigma don't depend on x.
+        t_future = delta_t * torch.arange(1, N + 1, device=device)
+        t_past   = delta_t * torch.arange(0, N,     device=device)
+        diff     = t_future.unsqueeze(1) - t_past.unsqueeze(0)
+        mask     = (diff > 0).float()
+
+        if self.equation.kernel_type == "identity":
+            K_mat = mask
+        elif self.equation.kernel_type == "exponential":
+            lam   = self.equation.kernel_params.get('lambda', 1.0)
+            K_mat = torch.exp(-lam * diff) * mask
+        elif self.equation.kernel_type == "fractional":
+            H     = self.equation.kernel_params.get('H', 0.3)
+            K_mat = (diff.clamp(min=1e-8) ** (H - 0.5)) * mask
+
+        dW = torch.randn(N, batch_size, self.equation.dim_d, device=device) * (delta_t ** 0.5)
+
+        b_incs = torch.stack([
+            self.equation.b(delta_t * i, x0) * delta_t
+            for i in range(N)
+        ], dim=0)                                                          # [N, batch, dim_x]
+
+        sig_mat = self.equation.sigma(0.0, x0)                            # [batch, dim_x, dim_d]
+        sdW     = torch.matmul(
+            sig_mat.unsqueeze(0).expand(N, -1, -1, -1),
+            dW.unsqueeze(-1)
+        ).squeeze(-1)                                                      # [N, batch, dim_x]
+
+        increments = b_incs + sdW
+
+        x_all = torch.cat([
+            x0.unsqueeze(0),
+            x0.unsqueeze(0) + torch.einsum("ji, ibd -> jbd", K_mat, increments)
+        ], dim=0)                                                          # [N+1, batch, dim_x]
+
+        x_paths      = x_all[start_n : start_n + num_steps + 1].permute(1, 0, 2).contiguous()
+        w_increments = dW[start_n : start_n + num_steps].permute(1, 0, 2).unsqueeze(-1)
+        return x_paths, w_increments
+
 
     def volterra_loss(self, x_paths, w_increments, n, y, z_batch, N, future_models_Y, reflected):
         delta_t = self.equation.T / N
@@ -379,15 +499,15 @@ class Solver:
             terminal_val = self.equation.g(t_n, x_T)
         # Vectorized f computation over all future timesteps
         s_array = delta_t * torch.arange(n, N, device=device)
+
         x_future = x_paths[:, :-1, :]  # [batch, num_steps, dim_x]
         f_vals = self.equation.f_vectorized(t_n, s_array, x_future, y_batch, z_batch)
-
         # Integral approximations
         integral_f = (f_vals * delta_t).sum(dim=1)  # [batch, dim_y]
         z_dot_w = torch.matmul(z_batch, w_increments).squeeze(-1)  # [batch, num_steps, dim_y]
         integral_z = z_dot_w.sum(dim=1)  # [batch, dim_y]
 
-        # BSDE equation: Y_n = g(T, X_T) + ∫_n^T f(...) ds - ∫_n^T Z dW
+
         estimate = terminal_val + integral_f - integral_z
         # loss = torch.mean((y - estimate) ** 2)
         loss = torch.mean((y - estimate).norm(2, dim=1))
@@ -628,7 +748,6 @@ def full_backward_training(example_type, config, equation, save_dir, reflected):
 
 
     return all_results, equation
-
 
 
 

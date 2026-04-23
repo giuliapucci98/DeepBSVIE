@@ -7,15 +7,15 @@ import json
 # =============== SELECT THESE BEFORE STARTING ===========
 example_type = "linear2"  # select example. Options: "linear1", "linear2", "example1a"
 reflected = False
-Train = False
-USE_WANDB = False
+Train = True
+USE_WANDB = True 
 
 kernel_type = "exponential"
 kernel_params = {}
 # kernel_params = {'lambda': 1.0}
 # kernel_params = {'H': 0.3}
 
-existing_run_name = f"{example_type}_{kernel_type}_0422_2058"
+existing_run_name = f"{example_type}_{kernel_type}_0423_1005"
 
 run_name = (
     example_type + "_" + kernel_type + "_" + datetime.now().strftime("%m%d_%H%M")
@@ -78,7 +78,7 @@ else:
         'dim_h_Z': 80,
         'batch_size': 2**12,
         'itr': 500,
-        'multiplier': 3,
+        'multiplier': 2,
         'lr': 1e-2,
         'lr_decay': 0.995,
         'factor_lr_decay': 0.5,
@@ -88,7 +88,7 @@ else:
         'early_stop_threshold': 1e-5,
         'seed': 42,
         'example_type': example_type,
-        'grad_clip': False,
+        'grad_clip': True,
         'max_grad_norm': 1.0,
     }
 
