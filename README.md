@@ -22,9 +22,8 @@ We implement a discrete-time neural scheme to approximate the solution of BSVIEs
 
 If you find this code useful, please consider citing:
 
-Agram, N. and Pucci, G. (2025). Deep BSVIEs Parametrization and Learning-Based Applications.  
-arXiv:2507.01948  
-http://arxiv.org/abs/2507.01948
+Agram, N. and Pucci, G. (2025). Deep BSVIEs Parametrization and Learning-Based Applications. Neural Networks. 
+https://www.sciencedirect.com/science/article/pii/S0893608026001747
 
 
 ## Reproducibility
