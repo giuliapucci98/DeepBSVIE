@@ -25,3 +25,15 @@ If you find this code useful, please consider citing:
 Agram, N. and Pucci, G. (2025). Deep BSVIEs Parametrization and Learning-Based Applications.  
 arXiv:2507.01948  
 http://arxiv.org/abs/2507.01948
+
+
+## Reproducibility
+
+The numerical results reported in the paper were produced on the 
+[Dardel HPC cluster](https://www.pdc.kth.se/hpc-services/computing-systems/dardel)
+at PDC Center for High Performance Computing (KTH), accessed through 
+the National Academic Infrastructure for Supercomputing in Sweden (NAISS).
+
+The folders `example name_<date>_<hour>/` contain the saved outputs 
+(model parameters, diagnostic plots, and error logs) from the specific 
+runs used to generate the figures and tables in the paper.
